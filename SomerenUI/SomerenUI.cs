@@ -42,6 +42,29 @@ namespace SomerenUI
             }
         }
 
+        private void ShowRoomsPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+
+            // hide all students
+            pnlStudents.Hide();
+
+            // show all rooms
+            panelRooms.Show();
+
+            try
+            {
+                // get and display all rooms
+                List<room> students = GetAllRooms();
+                DisplayStudents(students);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
+            }
+        }
+
         private List<room> GetStudents()
         {
             StudentService studentService = new StudentService();
@@ -76,5 +99,7 @@ namespace SomerenUI
         {
             ShowStudentsPanel();
         }
+
+       
     }
 }

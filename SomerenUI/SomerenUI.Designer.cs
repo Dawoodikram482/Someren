@@ -43,10 +43,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.listViewStudents = new System.Windows.Forms.ListView();
             this.label1 = new System.Windows.Forms.Label();
-            this.panelRooms = new System.Windows.Forms.Panel();
+            this.panelrooms = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.listViewRooms = new System.Windows.Forms.ListView();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelrooms = new System.Windows.Forms.Label();
             this.roomNumber = new System.Windows.Forms.ColumnHeader();
             this.room_type = new System.Windows.Forms.ColumnHeader();
             this.Capacity = new System.Windows.Forms.ColumnHeader();
@@ -55,7 +55,7 @@
             this.pnlDashboard.SuspendLayout();
             this.pnlStudents.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panelRooms.SuspendLayout();
+            this.panelrooms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -127,7 +127,7 @@
             // 
             this.pnlDashboard.Controls.Add(this.lblDashboard);
             this.pnlDashboard.Location = new System.Drawing.Point(22, 58);
-            this.pnlDashboard.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlDashboard.Margin = new System.Windows.Forms.Padding(6);
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(1742, 994);
             this.pnlDashboard.TabIndex = 1;
@@ -144,12 +144,12 @@
             // 
             // pnlStudents
             // 
-            this.pnlStudents.Controls.Add(this.panelRooms);
+            this.pnlStudents.Controls.Add(this.panelrooms);
             this.pnlStudents.Controls.Add(this.pictureBox1);
             this.pnlStudents.Controls.Add(this.listViewStudents);
             this.pnlStudents.Controls.Add(this.label1);
             this.pnlStudents.Location = new System.Drawing.Point(22, 58);
-            this.pnlStudents.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlStudents.Margin = new System.Windows.Forms.Padding(6);
             this.pnlStudents.Name = "pnlStudents";
             this.pnlStudents.Size = new System.Drawing.Size(1742, 994);
             this.pnlStudents.TabIndex = 2;
@@ -158,7 +158,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(241, 262);
             this.pictureBox1.TabIndex = 2;
@@ -167,7 +167,7 @@
             // listViewStudents
             // 
             this.listViewStudents.Location = new System.Drawing.Point(30, 90);
-            this.listViewStudents.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listViewStudents.Margin = new System.Windows.Forms.Padding(6);
             this.listViewStudents.Name = "listViewStudents";
             this.listViewStudents.Size = new System.Drawing.Size(1419, 650);
             this.listViewStudents.TabIndex = 1;
@@ -184,16 +184,16 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Students";
             // 
-            // panelRooms
+            // panelrooms
             // 
-            this.panelRooms.Controls.Add(this.pictureBox2);
-            this.panelRooms.Controls.Add(this.listViewRooms);
-            this.panelRooms.Controls.Add(this.label2);
-            this.panelRooms.Location = new System.Drawing.Point(8, 8);
-            this.panelRooms.Margin = new System.Windows.Forms.Padding(6);
-            this.panelRooms.Name = "panelRooms";
-            this.panelRooms.Size = new System.Drawing.Size(1742, 994);
-            this.panelRooms.TabIndex = 3;
+            this.panelrooms.Controls.Add(this.pictureBox2);
+            this.panelrooms.Controls.Add(this.listViewRooms);
+            this.panelrooms.Controls.Add(this.labelrooms);
+            this.panelrooms.Location = new System.Drawing.Point(106, 434);
+            this.panelrooms.Margin = new System.Windows.Forms.Padding(6);
+            this.panelrooms.Name = "panelrooms";
+            this.panelrooms.Size = new System.Drawing.Size(1742, 994);
+            this.panelrooms.TabIndex = 3;
             // 
             // pictureBox2
             // 
@@ -218,40 +218,40 @@
             this.listViewRooms.Size = new System.Drawing.Size(1419, 650);
             this.listViewRooms.TabIndex = 1;
             this.listViewRooms.UseCompatibleStateImageBehavior = false;
+            this.listViewRooms.View = System.Windows.Forms.View.Details;
             // 
-            // label2
+            // labelrooms
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.label2.Location = new System.Drawing.Point(24, 15);
-            this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(173, 65);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Rooms";
+            this.labelrooms.AutoSize = true;
+            this.labelrooms.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelrooms.Location = new System.Drawing.Point(24, 15);
+            this.labelrooms.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelrooms.Name = "labelrooms";
+            this.labelrooms.Size = new System.Drawing.Size(173, 65);
+            this.labelrooms.TabIndex = 0;
+            this.labelrooms.Text = "Rooms";
             // 
             // roomNumber
             // 
             this.roomNumber.Text = "Room Number";
-            this.roomNumber.Width = 150;
+            this.roomNumber.Width = 200;
             // 
             // room_type
             // 
             this.room_type.Text = "Room Type";
             this.room_type.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.room_type.Width = 150;
+            this.room_type.Width = 200;
             // 
             // Capacity
             // 
             this.Capacity.Text = "Capacity";
             this.Capacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Capacity.Width = 150;
+            this.Capacity.Width = 200;
             // 
             // buildingtype
             // 
-            this.buildingtype.Text = "Building Type";
             this.buildingtype.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.buildingtype.Width = 150;
+            this.buildingtype.Width = 200;
             // 
             // SomerenUI
             // 
@@ -262,7 +262,7 @@
             this.Controls.Add(this.pnlStudents);
             this.Controls.Add(this.pnlDashboard);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SomerenUI";
             this.Text = "SomerenApp";
             this.menuStrip1.ResumeLayout(false);
@@ -272,8 +272,8 @@
             this.pnlStudents.ResumeLayout(false);
             this.pnlStudents.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panelRooms.ResumeLayout(false);
-            this.panelRooms.PerformLayout();
+            this.panelrooms.ResumeLayout(false);
+            this.panelrooms.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -296,13 +296,13 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ListView listViewStudents;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Panel panelRooms;
+        private System.Windows.Forms.Panel panelrooms;
         private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.ListView listViewRooms;
         private System.Windows.Forms.ColumnHeader roomNumber;
         private System.Windows.Forms.ColumnHeader room_type;
         private System.Windows.Forms.ColumnHeader Capacity;
         private System.Windows.Forms.ColumnHeader buildingtype;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelrooms;
     }
 }
