@@ -33,7 +33,7 @@ namespace SomerenUI
             try
             {
                 // get and display all students
-                List<Student> students = GetStudents();
+                List<room> students = GetStudents();
                 DisplayStudents(students);
             }
             catch (Exception e)
@@ -42,19 +42,19 @@ namespace SomerenUI
             }
         }
 
-        private List<Student> GetStudents()
+        private List<room> GetStudents()
         {
             StudentService studentService = new StudentService();
-            List<Student> students = studentService.GetStudents();
+            List<room> students = studentService.GetStudents();
             return students;
         }
 
-        private void DisplayStudents(List<Student> students)
+        private void DisplayStudents(List<room> students)
         {
             // clear the listview before filling it
             listViewStudents.Clear();
 
-            foreach (Student student in students)
+            foreach (room student in students)
             {
                 ListViewItem li = new ListViewItem(student.Name);
                 li.Tag = student;   // link student object to listview item

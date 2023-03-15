@@ -5,22 +5,22 @@ using SomerenModel;
 
 namespace SomerenDAL
 {
-    public class StudentDao : BaseDao
+    public class RoomDao : BaseDao
     {
-        public List<Student> GetAllStudents()
+        public List<room> GetAllStudents()
         {
             string query = "SELECT StudentId, Name FROM [TABLE]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
 
-        private List<Student> ReadTables(DataTable dataTable)
+        private List<room> ReadTables(DataTable dataTable)
         {
-            List<Student> students = new List<Student>();
+            List<room> students = new List<room>();
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                Student student = new Student()
+                room student = new room()
                 {
                     Number = (int)dr["StudentId"],
                     Name = dr["Name"].ToString()
