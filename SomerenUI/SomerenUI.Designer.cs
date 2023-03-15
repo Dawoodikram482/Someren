@@ -40,23 +40,23 @@
             this.pnlDashboard = new System.Windows.Forms.Panel();
             this.lblDashboard = new System.Windows.Forms.Label();
             this.pnlStudents = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.listViewStudents = new System.Windows.Forms.ListView();
-            this.label1 = new System.Windows.Forms.Label();
             this.panelrooms = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.listViewRooms = new System.Windows.Forms.ListView();
-            this.labelrooms = new System.Windows.Forms.Label();
             this.roomNumber = new System.Windows.Forms.ColumnHeader();
             this.room_type = new System.Windows.Forms.ColumnHeader();
             this.Capacity = new System.Windows.Forms.ColumnHeader();
             this.buildingtype = new System.Windows.Forms.ColumnHeader();
+            this.labelrooms = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.listViewStudents = new System.Windows.Forms.ListView();
+            this.label1 = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pnlDashboard.SuspendLayout();
             this.pnlStudents.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.panelrooms.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -154,6 +154,77 @@
             this.pnlStudents.Size = new System.Drawing.Size(1742, 994);
             this.pnlStudents.TabIndex = 2;
             // 
+            // panelrooms
+            // 
+            this.panelrooms.Controls.Add(this.pictureBox2);
+            this.panelrooms.Controls.Add(this.listViewRooms);
+            this.panelrooms.Controls.Add(this.labelrooms);
+            this.panelrooms.Location = new System.Drawing.Point(6, 0);
+            this.panelrooms.Margin = new System.Windows.Forms.Padding(6);
+            this.panelrooms.Name = "panelrooms";
+            this.panelrooms.Size = new System.Drawing.Size(1742, 994);
+            this.panelrooms.TabIndex = 3;
+
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
+            this.pictureBox2.Location = new System.Drawing.Point(1495, 0);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(6);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(241, 262);
+            this.pictureBox2.TabIndex = 2;
+            this.pictureBox2.TabStop = false;
+            // 
+            // listViewRooms
+            // 
+            this.listViewRooms.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.roomNumber,
+            this.room_type,
+            this.Capacity,
+            this.buildingtype});
+            this.listViewRooms.Location = new System.Drawing.Point(30, 90);
+            this.listViewRooms.Margin = new System.Windows.Forms.Padding(6);
+            this.listViewRooms.Name = "listViewRooms";
+            this.listViewRooms.Size = new System.Drawing.Size(1419, 650);
+            this.listViewRooms.TabIndex = 1;
+            this.listViewRooms.UseCompatibleStateImageBehavior = false;
+            this.listViewRooms.View = System.Windows.Forms.View.Details;
+            // 
+            // roomNumber
+            // 
+            this.roomNumber.Text = "Room Number";
+            this.roomNumber.Width = 200;
+            // 
+            // room_type
+            // 
+            this.room_type.Text = "Room Type";
+            this.room_type.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.room_type.Width = 200;
+            // 
+            // Capacity
+            // 
+            this.Capacity.Text = "Capacity";
+            this.Capacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.Capacity.Width = 200;
+            // 
+            // buildingtype
+            // 
+            this.buildingtype.Text = "Building Type";
+            this.buildingtype.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.buildingtype.Width = 200;
+            // 
+            // labelrooms
+            // 
+            this.labelrooms.AutoSize = true;
+            this.labelrooms.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelrooms.Location = new System.Drawing.Point(24, 15);
+            this.labelrooms.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.labelrooms.Name = "labelrooms";
+            this.labelrooms.Size = new System.Drawing.Size(173, 65);
+            this.labelrooms.TabIndex = 0;
+            this.labelrooms.Text = "Rooms";
+            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
@@ -184,75 +255,6 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Students";
             // 
-            // panelrooms
-            // 
-            this.panelrooms.Controls.Add(this.pictureBox2);
-            this.panelrooms.Controls.Add(this.listViewRooms);
-            this.panelrooms.Controls.Add(this.labelrooms);
-            this.panelrooms.Location = new System.Drawing.Point(106, 434);
-            this.panelrooms.Margin = new System.Windows.Forms.Padding(6);
-            this.panelrooms.Name = "panelrooms";
-            this.panelrooms.Size = new System.Drawing.Size(1742, 994);
-            this.panelrooms.TabIndex = 3;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(6);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(241, 262);
-            this.pictureBox2.TabIndex = 2;
-            this.pictureBox2.TabStop = false;
-            // 
-            // listViewRooms
-            // 
-            this.listViewRooms.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.roomNumber,
-            this.room_type,
-            this.Capacity,
-            this.buildingtype});
-            this.listViewRooms.Location = new System.Drawing.Point(30, 90);
-            this.listViewRooms.Margin = new System.Windows.Forms.Padding(6);
-            this.listViewRooms.Name = "listViewRooms";
-            this.listViewRooms.Size = new System.Drawing.Size(1419, 650);
-            this.listViewRooms.TabIndex = 1;
-            this.listViewRooms.UseCompatibleStateImageBehavior = false;
-            this.listViewRooms.View = System.Windows.Forms.View.Details;
-            // 
-            // labelrooms
-            // 
-            this.labelrooms.AutoSize = true;
-            this.labelrooms.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.labelrooms.Location = new System.Drawing.Point(24, 15);
-            this.labelrooms.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.labelrooms.Name = "labelrooms";
-            this.labelrooms.Size = new System.Drawing.Size(173, 65);
-            this.labelrooms.TabIndex = 0;
-            this.labelrooms.Text = "Rooms";
-            // 
-            // roomNumber
-            // 
-            this.roomNumber.Text = "Room Number";
-            this.roomNumber.Width = 200;
-            // 
-            // room_type
-            // 
-            this.room_type.Text = "Room Type";
-            this.room_type.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.room_type.Width = 200;
-            // 
-            // Capacity
-            // 
-            this.Capacity.Text = "Capacity";
-            this.Capacity.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.Capacity.Width = 200;
-            // 
-            // buildingtype
-            // 
-            this.buildingtype.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.buildingtype.Width = 200;
-            // 
             // SomerenUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -271,10 +273,10 @@
             this.pnlDashboard.PerformLayout();
             this.pnlStudents.ResumeLayout(false);
             this.pnlStudents.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panelrooms.ResumeLayout(false);
             this.panelrooms.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -2,7 +2,7 @@
 
 namespace SomerenModel
 {
-    public class room
+    public class Student
     {
         public int Id { get; set; }     // database id
         public string Name { get; set; }

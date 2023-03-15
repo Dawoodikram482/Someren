@@ -12,20 +12,20 @@ namespace SomerenDAL
     
         public class RoomDao : BaseDao
         {
-            public List<room> GetAllRooms()
+            public List<Room> GetAllRooms()
             {
                 string query = "SELECT Id, Number, RoomType, BuildingType  FROM [Room]";
                 SqlParameter[] sqlParameters = new SqlParameter[0];
                 return ReadTables(ExecuteSelectQuery(query, sqlParameters));
             }
 
-            private List<room> ReadTables(DataTable dataTable)
+            private List<Room> ReadTables(DataTable dataTable)
             {
-                List<room> rooms = new List<room>();
+                List<Room> rooms = new List<Room>();
 
                 foreach (DataRow dr in dataTable.Rows)
                 {
-                    room Room = new room()
+                    Room Room = new Room()
                     {
                         Id = (int)dr["room_id"],
                         Number =(int)dr["roomNumber"],

@@ -20,7 +20,7 @@ namespace SomerenDAL
 
             foreach (DataRow dr in dataTable.Rows)
             {
-                room student = new room()
+                Student student = new Student()
                 {
                     Number = (int)dr["StudentId"],
                     Name = dr["Name"].ToString()
