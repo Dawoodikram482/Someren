@@ -13,6 +13,8 @@ namespace SomerenUI
         public SomerenUI()
         {
             InitializeComponent();
+
+            ShowDashboardPanel();
         }
 
         private void ShowDashboardPanel()
@@ -44,6 +46,26 @@ namespace SomerenUI
             }
         }
 
+        private void ShowActivitiesPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+
+            // show students
+            pnlStudents.Show();
+
+            try
+            {
+                // get and display all students
+                List<Activity> activities = GetActivities();
+                DisplayActivities(activities);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the activities: " + e.Message);
+            }
+        }
+
         private List<Student> GetStudents()
         {
             StudentService studentService = new StudentService();
@@ -51,6 +73,12 @@ namespace SomerenUI
             return students;
         }
 
+        private List<Activity> GetActivities()
+        {
+            ActivityService activityService = new ActivityService();
+            List<Activity> activities = activityService.GetActivities();
+            return activities;
+        }
         private void DisplayStudents(List<Student> students)
         {
             // clear the listview before filling it
@@ -62,6 +90,19 @@ namespace SomerenUI
                 li.Tag = student;   // link student object to listview item
                 listViewStudents.Items.Add(li);
             }
+        }
+
+        private void DisplayActivities(List<Activity> activities)
+        {
+            //clear the listview before filling it
+            
+           
+            //foreach (Activity activity in activities)
+            //{
+            //    ListViewItem li = new ListViewItem(student.Name);
+            //    li.Tag = student;   // link student object to listview item
+            //    listViewStudents.Items.Add(li);
+            //}
         }
 
         private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
@@ -85,11 +126,12 @@ namespace SomerenUI
 
         private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //ShowActivitiesPanel();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT activity_name,activity_time FROM [dbo].[Activity]", "server = grasshoppersdatabase4.database.windows.net; database = GrassHoppersDataBase; UID = GrasshopperGroup; password = IFKRGroup5project3");
+            ShowActivitiesPanel();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT activity_id, activity_name,activity_time FROM [dbo].[Activity]", "server = grasshoppersdatabase4.database.windows.net; database = GrassHoppersDataBase; UID = GrasshopperGroup; password = IFKRGroup5project3");
             DataSet ds = new DataSet();
             da.Fill(ds, "Activity");
             gvAct.DataSource = ds.Tables["Activity"].DefaultView;
+
         }
 
 
