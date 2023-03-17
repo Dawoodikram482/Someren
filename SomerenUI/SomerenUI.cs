@@ -13,7 +13,10 @@ namespace SomerenUI
         public SomerenUI()
         {
             InitializeComponent();
-            ShowDashboardPanel();
+
+
+            ShowDashboardPanel(); //opens dashboard panel when you log in
+
         }
 
 
@@ -22,8 +25,11 @@ namespace SomerenUI
         {
             // hide all other panels
             pnlStudents.Hide();
-            pnlLecture.Hide();
-            pnlRooms.Hide();
+
+
+            panelrooms.Hide();
+
+
             // show dashboard
             pnlDashboard.Show();
         }
@@ -62,17 +68,47 @@ namespace SomerenUI
             }
         }
 
+        private void ShowRoomsPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+
+            // hide all students
+            pnlStudents.Hide();
+
+            // show all rooms
+            panelrooms.Show();
+
+            try
+            {
+                // get and display all rooms
+                List<Room> rooms = GetRooms();
+                DisplayRooms(rooms);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the rooms: " + e.Message);
+            }
+        }
+
         private List<Student> GetStudents()
         {
             StudentService studentService = new StudentService();
             List<Student> students = studentService.GetStudents();
             return students;
         }
+        private List<Room> GetRooms()
+        {
+            RoomService roomService = new RoomService();
+            List<Room> Room = roomService.GetRoom();
+            return Room;
+        }
 
         private void DisplayStudents(List<Student> students)
         {
             // clear the listview before filling it
-            studentsDataGrid.Rows.Clear();
+
+            listViewStudents.Items.Clear();
 
 
             foreach (Student student in students)
@@ -93,8 +129,43 @@ namespace SomerenUI
 
 
 
-        // Teacher panel section
-        private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
+        private void DisplayRooms(List<Room> rooms)
+        {
+            // clear the listview before filling it
+            listViewRooms.Items.Clear();
+
+            foreach (Room room in rooms)
+            {
+                ListViewItem li = new ListViewItem(room.Number.ToString());
+                li.Tag = room;   // link student object to listview item
+
+                if (room.RoomType == true)
+                {
+                    li.SubItems.Add("Single (Lecturers)");
+                }
+                else
+                {
+                    li.SubItems.Add("Dormitory (Students)");
+                }
+                if (room.RoomType == true)
+                {
+                    li.SubItems.Add("1");
+                }
+                else
+                {
+                    li.SubItems.Add("8");
+                }
+                li.SubItems.Add(room.BuildingType.ToString());
+
+
+
+
+                listViewRooms.Items.Add(li);
+            }
+        }
+
+        private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
+
         {
             ShowTeachersPanel();
         }
@@ -181,43 +252,15 @@ namespace SomerenUI
             return rooms;
         }
 
-        private void DisplayRooms(List<Room> rooms)
+        
+
+        private void roomsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            // clear the listview before filling it
-            //roomsDataGrid.Rows.Clear();
-            roomListView.Items.Clear();
-            roomListView.View = View.Details;
+            ShowRoomsPanel();  //shows room panel when room button is clicked from menu
 
-            foreach (Room room in rooms)
-            {
-                string[] arr = new string[3];
-
-                arr[0] = room.Number.ToString();
-                arr[1] = room.Capacity.ToString();
-                arr[2] = room.Type ? "Teacher" : "Student";
-
-                //roomListView.Items.Add("Col1Text").SubItems.AddRange(arr);
-                roomListView.Items.Add(new ListViewItem(arr));
-                ////DataGridViewRow row = new DataGridViewRow();
-
-                //row.CreateCells(studentsDataGrid);
-                //row.Cells[0].Value = room.Number;
-                //row.Cells[1].Value = room.Capacity;
-                //row.Cells[2].Value = room.Type ? "Teacher" : "Student";
-                //roomsDataGrid.Rows.Add(row);
-            }
         }
-        private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowRoomsPanel();
-        }
-        //
 
-
-        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            Application.Exit();
-        }
+       
 
     }
 

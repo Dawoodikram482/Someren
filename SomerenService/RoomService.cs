@@ -10,17 +10,19 @@ namespace SomerenService
 {
     public class RoomService
     {
-        private RoomDao roomDb;
+
+        private RoomDao roomdb;
 
         public RoomService()
         {
-            roomDb = new RoomDao();
+            roomdb = new RoomDao(); //creating new room DAO using database of room "roomdb"
         }
 
-        public List<Room> GetTeachers()
+        public List<Room> GetRoom()
         {
-            List<Room> rooms = roomDb.GetAllRooms();
-            return rooms;
+            List<Room> Rooms = roomdb.GetAllRooms(); //"redirecting room into lists"
+            return Rooms;
+
         }
     }
 }
