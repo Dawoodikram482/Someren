@@ -3,6 +3,8 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace SomerenUI
 {
@@ -76,5 +78,22 @@ namespace SomerenUI
         {
             ShowStudentsPanel();
         }
+
+
+
+        /////////////////////////////////////////////Activity////////////////////////////////////////////////////////
+
+        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //ShowActivitiesPanel();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT activity_name,activity_time FROM [dbo].[Activity]", "server = grasshoppersdatabase4.database.windows.net; database = GrassHoppersDataBase; UID = GrasshopperGroup; password = IFKRGroup5project3");
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Activity");
+            gvAct.DataSource = ds.Tables["Activity"].DefaultView;
+        }
+
+
+
+
     }
 }
