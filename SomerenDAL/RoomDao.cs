@@ -14,13 +14,17 @@ namespace SomerenDAL
         {
             public List<Room> GetAllRooms()
             {
-                string query = "SELECT Id, Number, RoomType, BuildingType  FROM [Room]";
+
+                 // obtains rooms from the database
+                string query = "SELECT room_id, roomNumber, room_type, buildingtype  FROM [Rooms]";
                 SqlParameter[] sqlParameters = new SqlParameter[0];
                 return ReadTables(ExecuteSelectQuery(query, sqlParameters));
             }
 
             private List<Room> ReadTables(DataTable dataTable)
             {
+              
+                //makes a list of room and adds room data from database
                 List<Room> rooms = new List<Room>();
 
                 foreach (DataRow dr in dataTable.Rows)

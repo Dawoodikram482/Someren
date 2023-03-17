@@ -11,12 +11,15 @@ namespace SomerenUI
         public SomerenUI()
         {
             InitializeComponent();
+
+            ShowDashboardPanel(); //opens dashboard panel when you log in
         }
 
         private void ShowDashboardPanel()
         {
             // hide all other panels
             pnlStudents.Hide();
+            panelrooms.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -61,7 +64,7 @@ namespace SomerenUI
             }
             catch (Exception e)
             {
-                MessageBox.Show("Something went wrong while loading the students: " + e.Message);
+                MessageBox.Show("Something went wrong while loading the rooms: " + e.Message);
             }
         }
 
@@ -81,7 +84,7 @@ namespace SomerenUI
         private void DisplayStudents(List<Student> students)
         {
             // clear the listview before filling it
-            listViewStudents.Clear();
+            listViewStudents.Items.Clear();
 
             foreach (Student student in students)
             {
@@ -94,7 +97,7 @@ namespace SomerenUI
         private void DisplayRooms(List<Room> rooms)
         {
             // clear the listview before filling it
-            listViewRooms.Clear();
+            listViewRooms.Items.Clear();
 
             foreach (Room room in rooms)
             {
@@ -103,11 +106,11 @@ namespace SomerenUI
 
                 if (room.RoomType == true)
                 {
-                    li.SubItems.Add("Single");
+                    li.SubItems.Add("Single (Lecturers)");
                 }
                 else
                 {
-                    li.SubItems.Add("Dormitory");
+                    li.SubItems.Add("Dormitory (Students)");
                 }
                 if (room.RoomType == true)
                 {
@@ -140,10 +143,14 @@ namespace SomerenUI
         {
             ShowStudentsPanel();
         }
-        private void roomsToolStripMenuItem_Click(object sender, EventArgs e)
+        
+
+        private void roomsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            ShowRoomsPanel();
+            ShowRoomsPanel();  //shows room panel when room button is clicked from menu
+
         }
 
+       
     }
 }

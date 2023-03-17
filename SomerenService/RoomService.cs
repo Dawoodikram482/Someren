@@ -14,12 +14,12 @@ namespace SomerenService
 
         public RoomService()
         {
-            roomdb = new RoomDao();
+            roomdb = new RoomDao(); //creating new room DAO using database of room "roomdb"
         }
 
         public List<Room> GetRoom()
         {
-            List<Room> Rooms = roomdb.GetAllRooms();
+            List<Room> Rooms = roomdb.GetAllRooms(); //"redirecting room into lists"
             return Rooms;
         }
     }
