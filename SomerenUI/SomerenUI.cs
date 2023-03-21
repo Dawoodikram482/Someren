@@ -235,10 +235,10 @@ namespace SomerenUI
                     li.SubItems.Add("No");
                 }
 
-                
-               
 
-                listViewActivity.Items.Add(li);
+
+
+                listViewlecturer.Items.Add(li);
             }
 
         }
