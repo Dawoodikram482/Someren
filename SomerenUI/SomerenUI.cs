@@ -238,7 +238,7 @@ namespace SomerenUI
                 
                
 
-                listViewActivity.Items.Add(li);
+                listViewlecturer.Items.Add(li);
             }
 
         }
