@@ -3,6 +3,8 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+using System.Linq;
+using System.Globalization;
 
 namespace SomerenUI
 {
@@ -18,10 +20,11 @@ namespace SomerenUI
         private void ShowDashboardPanel()
         {
             // hide all other panels
-           pnlStudents.Hide();
+            pnlStudents.Hide();
             panelrooms.Hide();
             panelActivity.Hide();
             panellecturer.Hide();
+            panelVatCalc.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -35,6 +38,7 @@ namespace SomerenUI
             panelrooms.Hide();
             panelActivity.Hide();
             panellecturer.Hide();
+            panelVatCalc.Hide();
 
             // show students
             pnlStudents.Show();
@@ -51,7 +55,7 @@ namespace SomerenUI
             }
         }
 
-        
+
 
         private List<Student> GetStudents()
         {
@@ -59,7 +63,7 @@ namespace SomerenUI
             List<Student> students = studentService.GetStudents();
             return students;
         }
-       
+
 
         private void DisplayStudents(List<Student> students)
         {
@@ -78,7 +82,7 @@ namespace SomerenUI
                 li.SubItems.Add(student.Phone_number.ToString());
                 li.SubItems.Add(student.room.ToString());
 
-               listViewStudents.Items.Add(li);
+                listViewStudents.Items.Add(li);
             }
         }
 
@@ -97,8 +101,9 @@ namespace SomerenUI
             panelActivity.Hide();
             panellecturer.Hide();
             pnlStudents.Hide();
+            panelVatCalc.Hide();
 
-            
+
             // show all rooms
             panelrooms.Show();
 
@@ -166,6 +171,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             panelrooms.Hide();
             panellecturer.Hide();
+            panelVatCalc.Hide();
 
             //show all activity
             panelActivity.Show();
@@ -173,7 +179,7 @@ namespace SomerenUI
             try
             {
                 // get and display all activity
-                List <Activity> activities = GetActivities();
+                List<Activity> activities = GetActivities();
                 DisplayActivities(activities);
             }
             catch (Exception e)
@@ -218,7 +224,7 @@ namespace SomerenUI
 
             foreach (Teacher teacher in teachers)
             {
-                ListViewItem li = new ListViewItem(teacher.Id.ToString ());
+                ListViewItem li = new ListViewItem(teacher.Id.ToString());
                 li.Tag = teacher;   // link student object to listview item
                 li.SubItems.Add(teacher.FirstName.ToString());
                 li.SubItems.Add(teacher.LastName.ToString());
@@ -235,8 +241,8 @@ namespace SomerenUI
                     li.SubItems.Add("No");
                 }
 
-                
-               
+
+
 
                 listViewlecturer.Items.Add(li);
             }
@@ -250,6 +256,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             panelrooms.Hide();
             panelActivity.Hide();
+            panelVatCalc.Hide();
 
             //show all activity
             panellecturer.Show();
@@ -258,6 +265,7 @@ namespace SomerenUI
             {
                 // get and display all teacher
                 List<Teacher> teachers = GetTeachers();
+
                 DisplayTeachers(teachers);
             }
             catch (Exception e)
@@ -265,6 +273,51 @@ namespace SomerenUI
                 MessageBox.Show("Something went wrong while loading the teachers: " + e.Message);
             }
         }
+
+        // VAT Calculation - part d start
+        private void ShowVatCalculationPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            panelrooms.Hide();
+            panelActivity.Hide();
+            panellecturer.Hide();
+
+            //show all activity
+            panelVatCalc.Show();
+
+            BuysService buysService = new BuysService();
+            DrinkService drinkService = new DrinkService();
+
+
+            try
+            {
+                //int[] vatCalcComboBox = buysService.GetAllYears().ToArray();
+                List<Buys> allBuys = buysService.GetBuys();
+                List<Drinks> allDrinks = drinkService.GetDrinks();
+
+
+                int[] vatCalcComboBox = allBuys.DistinctBy(x => x.SaleDate.Year).OrderByDescending(x => x.SaleDate.Year).Select(x => x.SaleDate.Year).ToArray();
+
+                // get and display all teacher
+                vatCalcSelectYearCombo.DataSource = vatCalcComboBox;
+                string[] vatCalcQuarerComboBox = new string[]
+                {
+                        "Q1", "Q2", "Q3", "Q4"
+                };
+                vatCalcQuarterCombo.DataSource = vatCalcQuarerComboBox;
+
+                vatCalcSelectYearCombo.SelectedIndex = 0;
+                vatCalcQuarterCombo.SelectedIndex = 0;
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the teachers: " + e.Message);
+            }
+        }
+
+        // part D end
 
         private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
         {
@@ -280,7 +333,7 @@ namespace SomerenUI
         {
             ShowStudentsPanel(); //show student panel
         }
-        
+
 
         private void roomsToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
@@ -297,5 +350,115 @@ namespace SomerenUI
         {
             ShowTeachersPanel();
         }
+
+        // part D start
+        private void vatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowVatCalculationPanel();
+
+        }
+
+        private void vatCalcSelectYearCombo_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            SetQuarterFromTo();
+        }
+
+        private void vatCalcQuarterCombo_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+            lowTariffVatLabel.Text = "";
+            highTariffVatLabel.Text = "";
+
+            SetQuarterFromTo();
+            float lowTariff = GetLowTariffVat();
+            float highTariff = GetHighTariffVat();
+
+            lowTariffVatLabel.Text = lowTariff.ToString("C2", CultureInfo.CreateSpecificCulture("nl-NL"));
+            highTariffVatLabel.Text = highTariff.ToString("C2", CultureInfo.CreateSpecificCulture("nl-NL"));
+
+            totalVatLabel.Text = (lowTariff + highTariff).ToString("C2", CultureInfo.CreateSpecificCulture("nl-NL"));
+
+
+        }
+        private void SetQuarterFromTo()
+        {
+            DateTime[] dates = GetQuarterFromTo().ToArray();
+
+            if (vatCalcSelectYearCombo.SelectedValue == null || dates.Length == 0)
+                return;
+
+            quarterRunsFromLabel.Text = $"{dates[0].ToShortDateString()}";
+            quarterRunsToLabel.Text = $"{dates[1].ToShortDateString()}";
+
+        }
+
+        private List<DateTime> GetQuarterFromTo()
+        {
+            List<DateTime> dates = new List<DateTime>();
+            if (vatCalcSelectYearCombo.SelectedValue == null)
+                return dates;
+
+
+            switch (vatCalcQuarterCombo.SelectedValue)
+            {
+                case "Q1":
+                    dates.Add(DateTime.Parse($"01/01/{vatCalcSelectYearCombo.SelectedValue}"));
+                    dates.Add(DateTime.Parse($"03/31/{vatCalcSelectYearCombo.SelectedValue}"));
+                    break;
+                case "Q2":
+                    dates.Add(DateTime.Parse($"04/01/{vatCalcSelectYearCombo.SelectedValue}"));
+                    dates.Add(DateTime.Parse($"06/30/{vatCalcSelectYearCombo.SelectedValue}"));
+                    break;
+                case "Q3":
+                    dates.Add(DateTime.Parse($"07/01/{vatCalcSelectYearCombo.SelectedValue}"));
+                    dates.Add(DateTime.Parse($"09/30/{vatCalcSelectYearCombo.SelectedValue}"));
+                    break;
+                case "Q4":
+                    dates.Add(DateTime.Parse($"10/01/{vatCalcSelectYearCombo.SelectedValue}"));
+                    dates.Add(DateTime.Parse($"12/31/{vatCalcSelectYearCombo.SelectedValue}"));
+                    break;
+            }
+
+            return dates;
+        }
+
+        private float GetLowTariffVat()
+        {
+            BuysService buysService = new BuysService();
+            DrinkService drinkService = new DrinkService();
+
+            List<Buys> allBuys = buysService.GetBuys();
+            List<Drinks> allDrinks = drinkService.GetDrinks();
+
+            DateTime[] dates = GetQuarterFromTo().ToArray();
+            if (dates.Length == 0)
+                return 0f;
+
+            return (from buys in allBuys
+                    join drinks in allDrinks on buys.DrinkId equals drinks.Id
+                    where (drinks.DrinkType == "non-alcholic" || drinks.Vat == 6) && (buys.SaleDate > dates[0] && buys.SaleDate < dates[1])
+                    select (drinks.Vat / 100) * drinks.Price).Sum();
+        }
+        private float GetHighTariffVat()
+        {
+
+            BuysService buysService = new BuysService();
+            DrinkService drinkService = new DrinkService();
+
+            List<Buys> allBuys = buysService.GetBuys();
+            List<Drinks> allDrinks = drinkService.GetDrinks();
+
+            DateTime[] dates = GetQuarterFromTo().ToArray();
+            if (dates.Length == 0)
+                return 0f;
+
+            return (from buys in allBuys
+                    join drinks in allDrinks on buys.DrinkId equals drinks.Id
+                    where (drinks.DrinkType == "alcholic" || drinks.Vat == 12) && (buys.SaleDate > dates[0] && buys.SaleDate < dates[1])
+                    select (drinks.Vat / 100) * drinks.Price).Sum();
+        }
+
+
+
+        // part d end
     }
 }
