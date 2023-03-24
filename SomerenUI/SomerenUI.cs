@@ -440,32 +440,75 @@ namespace SomerenUI
             ShowCashRegisterPanel();
         }
 
-        private void checkoutbutton_Click(object sender, EventArgs e)
+        private void listViewDrinkList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
+            Enablecheckoutbutton();
+        }
 
-            ListView.SelectedListViewItemCollection selectedListViewItem = listViewstudentnames.SelectedItems;
+        private void listViewStudentList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Enablecheckoutbutton();
+        }
 
-            string firstName = listViewstudentnames.SelectedItems[0].SubItems[0].Text;
-            string lastName = listViewstudentnames.SelectedItems[0].SubItems[1].Text;
+        private void Enablecheckoutbutton()
+        {
 
-            string drinkName = listViewdrinks.SelectedItems[0].SubItems[1].Text;
-            string drinkType = listViewdrinks.SelectedItems[0].SubItems[1].Text;
-            string drinkPrice = listViewdrinks.SelectedItems[0].SubItems[2].Text;
-            string stock = listViewdrinks.SelectedItems[0].SubItems[3].Text;
-
-            string query = "INSERT INTO [Cash Register] (Firstname, Lastname, drink_name, drink_type, price, stock, sales) VALUES (@firstName, @lastName, @drinkName, @drinkType, @price, @stock, @sales)";
-
-            using (SqlCommand command = new SqlCommand(query))
+            if (listViewdrinks.SelectedItems.Count > 0 && listViewstudentnames.SelectedItems.Count > 0)
             {
-                command.Parameters.AddWithValue("@firstName", firstName);
-                command.Parameters.AddWithValue("@lastName", lastName);
-                command.Parameters.AddWithValue("@drinkName", drinkName);
-                command.Parameters.AddWithValue("@drinkType", drinkType);
-                command.Parameters.AddWithValue("@price", drinkPrice);
-                command.Parameters.AddWithValue("@stock", stock);
-                command.ExecuteNonQuery();
+                MessageBox.Show("abc");
+                int price = int.Parse(listViewdrinks.SelectedItems[0].SubItems[2].Text);
+                labelshow.Text = price.ToString();
+                checkoutbutton.Enabled = true;
+                
+            }
+            else
+            {
+                labelshow.Text = "0.00";
+                checkoutbutton.Enabled = false;
             }
         }
+
+        private void checkoutbutton_Click(object sender, EventArgs e)
+        {
+            string firstname = (listViewstudentnames.SelectedItems[0].SubItems[0].Text);
+            string lastname= (listViewstudentnames.SelectedItems[0].SubItems[1].Text);
+            string drinkname = listViewdrinks.SelectedItems[0].SubItems[0].Text;
+            string drinktype = listViewdrinks.SelectedItems[0].SubItems[1].Text;
+            int drinkprice = int.Parse(listViewdrinks.SelectedItems[0].SubItems[2].Text);
+            int stock = int.Parse(listViewdrinks.SelectedItems[0].SubItems[3].Text);
+
+            Order order = new Order();
+            order.FirstName = firstname;
+            order.LastName = lastname;
+            order.DrinkName = drinkname;
+            order.DrinkType = drinktype;
+            order.Price = drinkprice;
+            order.Stock = stock;
+
+
+            try
+            {
+                OrderService orderService = new OrderService();
+                orderService.OrderDrink(order);
+                MessageBox.Show("Checkout completed!!");
+                UnselectListviewItems(listViewdrinks);
+                UnselectListviewItems(listViewstudentnames);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Something went wrong while checkout: " + ex.Message);
+            }
+        }
+
+        private void UnselectListviewItems(ListView listView)
+        {
+            if (listView.SelectedIndices.Count > 0)
+                for (int i = 0; i < listView.SelectedIndices.Count; i++)
+                {
+                    listView.Items[listView.SelectedIndices[i]].Selected = false;
+                }
+        }
+
+      
     }
 }
