@@ -455,7 +455,7 @@ namespace SomerenUI
 
             if (listViewdrinks.SelectedItems.Count > 0 && listViewstudentnames.SelectedItems.Count > 0)
             {
-                MessageBox.Show("abc");
+                
                 int price = int.Parse(listViewdrinks.SelectedItems[0].SubItems[2].Text);
                 labelshow.Text = price.ToString();
                 checkoutbutton.Enabled = true;
