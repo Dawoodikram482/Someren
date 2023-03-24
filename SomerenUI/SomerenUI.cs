@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System;
 using System.Diagnostics;
 using Activity = SomerenModel.Activity;
+using System.Data.SqlClient;
 
 namespace SomerenUI
 {
@@ -25,7 +26,7 @@ namespace SomerenUI
             panelActivity.Hide();
             panellecturer.Hide();
             panelcashregister.Hide();
-           // paneldrinks.Hide();
+            // paneldrinks.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -39,7 +40,7 @@ namespace SomerenUI
             panelrooms.Hide();
             panelActivity.Hide();
             panellecturer.Hide();
-           // paneldrinks.Hide();
+            panelcashregister.Hide();
 
             // show students
             pnlStudents.Show();
@@ -102,7 +103,7 @@ namespace SomerenUI
             panelActivity.Hide();
             panellecturer.Hide();
             pnlStudents.Hide();
-           // paneldrinks.Hide();
+            panelcashregister.Hide();
 
             // show all rooms
             panelrooms.Show();
@@ -171,7 +172,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             panelrooms.Hide();
             panellecturer.Hide();
-           // paneldrinks.Hide();
+            panelcashregister.Hide();
 
             //show all activity
             panelActivity.Show();
@@ -256,7 +257,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             panelrooms.Hide();
             panelActivity.Hide();
-           // paneldrinks.Hide();
+            panelcashregister.Hide();
 
             //show all activity
             panellecturer.Show();
@@ -292,7 +293,7 @@ namespace SomerenUI
 
 
             // show all rooms
-           // paneldrinks.Show();
+            // paneldrinks.Show();
 
             try
             {
@@ -338,7 +339,7 @@ namespace SomerenUI
         }
 
 
-        private void DisplayCashRegisterPanel(List<Student> students, List <Drinks> drinks)
+        private void DisplayCashRegisterPanel(List<Student> students, List<Drinks> drinks)
         {
             listViewstudentnames.Items.Clear();
 
@@ -348,14 +349,14 @@ namespace SomerenUI
                 li.Tag = student;   // link student object to listview item
 
                 li.SubItems.Add(student.Last_name.ToString());
-               
+
 
                 listViewstudentnames.Items.Add(li);
             }
 
             listViewdrinks.Items.Clear();
 
-            foreach(Drinks drink in drinks)
+            foreach (Drinks drink in drinks)
             {
                 ListViewItem list = new ListViewItem(drink.drinkName.ToString());
                 list.Tag = drink;
@@ -378,7 +379,7 @@ namespace SomerenUI
             panelrooms.Hide();
 
 
-            
+
             // paneldrinks.Show();
             panelcashregister.Show();
 
@@ -387,7 +388,7 @@ namespace SomerenUI
                 // get and display students
                 List<Student> students = GetStudents();
                 List<Drinks> drinks = GetDrinks();
-                DisplayCashRegisterPanel(students,drinks);
+                DisplayCashRegisterPanel(students, drinks);
             }
             catch (Exception e)
             {
@@ -441,7 +442,30 @@ namespace SomerenUI
 
         private void checkoutbutton_Click(object sender, EventArgs e)
         {
+            
 
+            ListView.SelectedListViewItemCollection selectedListViewItem = listViewstudentnames.SelectedItems;
+
+            string firstName = listViewstudentnames.SelectedItems[0].SubItems[0].Text;
+            string lastName = listViewstudentnames.SelectedItems[0].SubItems[1].Text;
+
+            string drinkName = listViewdrinks.SelectedItems[0].SubItems[1].Text;
+            string drinkType = listViewdrinks.SelectedItems[0].SubItems[1].Text;
+            string drinkPrice = listViewdrinks.SelectedItems[0].SubItems[2].Text;
+            string stock = listViewdrinks.SelectedItems[0].SubItems[3].Text;
+
+            string query = "INSERT INTO [Cash Register] (Firstname, Lastname, drink_name, drink_type, price, stock, sales) VALUES (@firstName, @lastName, @drinkName, @drinkType, @price, @stock, @sales)";
+
+            using (SqlCommand command = new SqlCommand(query))
+            {
+                command.Parameters.AddWithValue("@firstName", firstName);
+                command.Parameters.AddWithValue("@lastName", lastName);
+                command.Parameters.AddWithValue("@drinkName", drinkName);
+                command.Parameters.AddWithValue("@drinkType", drinkType);
+                command.Parameters.AddWithValue("@price", drinkPrice);
+                command.Parameters.AddWithValue("@stock", stock);
+                command.ExecuteNonQuery();
+            }
         }
     }
 }
