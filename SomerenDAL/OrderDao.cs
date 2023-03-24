@@ -42,23 +42,7 @@ namespace SomerenDAL
             return orders;
         }
 
-        //public Boolean Create(string firstName,)
-        //{
-        //    // selecting data from two different tables
-        //    string query = "INSERT INTO [Cash Register] (Firstname, Lastname, drink_name, drink_type, price, stock, sales) VALUES (@firstName, @lastName, @drinkName, @drinkType, @price, @stock, @sales)";
 
-        //    using (SqlCommand command = new SqlCommand(query))
-        //    {
-        //        command.Parameters.AddWithValue("@firstName", First);
-        //        command.Parameters.AddWithValue("@lastName", lastName);
-        //        command.Parameters.AddWithValue("@drinkName", drinkName);
-        //        command.Parameters.AddWithValue("@drinkType", drinkType);
-        //        command.Parameters.AddWithValue("@price", drinkPrice);
-        //        command.Parameters.AddWithValue("@stock", stock);
-        //        command.ExecuteNonQuery();
-        //    }
-        //    return ReadTables(ExecuteSelectQuery(query, sqlParameters));
-        //}
 
     }
 }
