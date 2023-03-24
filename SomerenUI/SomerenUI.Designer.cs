@@ -477,7 +477,7 @@
             panelVatCalc.Controls.Add(vatCalcYearSelectLabel);
             panelVatCalc.Controls.Add(pictureBox5);
             panelVatCalc.Controls.Add(label5);
-            panelVatCalc.Location = new System.Drawing.Point(10, 24);
+            panelVatCalc.Location = new System.Drawing.Point(9, 24);
             panelVatCalc.Name = "panelVatCalc";
             panelVatCalc.Size = new System.Drawing.Size(938, 466);
             panelVatCalc.TabIndex = 9;

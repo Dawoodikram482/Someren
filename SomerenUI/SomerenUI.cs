@@ -284,36 +284,33 @@ namespace SomerenUI
             panelActivity.Hide();
             panellecturer.Hide();
 
-            //show all activity
+            //show vat calculation
             panelVatCalc.Show();
 
-            BuysService buysService = new BuysService();
-            DrinkService drinkService = new DrinkService();
+            VatCalcService vatCalcService = new VatCalcService();
 
 
             try
             {
-                //int[] vatCalcComboBox = buysService.GetAllYears().ToArray();
-                List<Buys> allBuys = buysService.GetBuys();
-                List<Drinks> allDrinks = drinkService.GetDrinks();
+                List<Order> allPurchases = vatCalcService.GetPurchases();
 
 
-                int[] vatCalcComboBox = allBuys.DistinctBy(x => x.SaleDate.Year).OrderByDescending(x => x.SaleDate.Year).Select(x => x.SaleDate.Year).ToArray();
+                int[] vatCalcComboBox = allPurchases.DistinctBy(x => x.DateTime.Year).OrderByDescending(x => x.DateTime.Year).Select(x => x.DateTime.Year).ToArray();
 
-                // get and display all teacher
                 vatCalcSelectYearCombo.DataSource = vatCalcComboBox;
                 string[] vatCalcQuarerComboBox = new string[]
                 {
                         "Q1", "Q2", "Q3", "Q4"
                 };
                 vatCalcQuarterCombo.DataSource = vatCalcQuarerComboBox;
-
-                vatCalcSelectYearCombo.SelectedIndex = 0;
                 vatCalcQuarterCombo.SelectedIndex = 0;
+
+                if (vatCalcComboBox.Length > 0)
+                    vatCalcSelectYearCombo.SelectedIndex = 0;
             }
             catch (Exception e)
             {
-                MessageBox.Show("Something went wrong while loading the teachers: " + e.Message);
+                MessageBox.Show("Something went wrong while loading the vat calculation: " + e.Message);
             }
         }
 
@@ -369,8 +366,8 @@ namespace SomerenUI
             highTariffVatLabel.Text = "";
 
             SetQuarterFromTo();
-            float lowTariff = GetLowTariffVat();
-            float highTariff = GetHighTariffVat();
+            float lowTariff = GetTariffVat(false);
+            float highTariff = GetTariffVat(true);
 
             lowTariffVatLabel.Text = lowTariff.ToString("C2", CultureInfo.CreateSpecificCulture("nl-NL"));
             highTariffVatLabel.Text = highTariff.ToString("C2", CultureInfo.CreateSpecificCulture("nl-NL"));
@@ -421,43 +418,23 @@ namespace SomerenUI
             return dates;
         }
 
-        private float GetLowTariffVat()
+        private float GetTariffVat(bool isAlcholic=false)
         {
-            BuysService buysService = new BuysService();
-            DrinkService drinkService = new DrinkService();
+            VatCalcService vatCalcSerive = new VatCalcService();
 
-            List<Buys> allBuys = buysService.GetBuys();
-            List<Drinks> allDrinks = drinkService.GetDrinks();
+            List<Order> allPurchases = vatCalcSerive.GetPurchases();
 
             DateTime[] dates = GetQuarterFromTo().ToArray();
+
+            string drinkType = isAlcholic ? "alcholic" : "non-alcholic";
+            decimal vat = isAlcholic ? 0.22m: 0.06m;
+
             if (dates.Length == 0)
                 return 0f;
-
-            return (from buys in allBuys
-                    join drinks in allDrinks on buys.DrinkId equals drinks.Id
-                    where (drinks.DrinkType == "non-alcholic" || drinks.Vat == 6) && (buys.SaleDate > dates[0] && buys.SaleDate < dates[1])
-                    select (drinks.Vat / 100) * drinks.Price).Sum();
+            return (from p in allPurchases
+                    where(p.DrinkType == drinkType) && (p.DateTime > dates[0] && p.DateTime < dates[1])
+                    select (float)(vat * p.Price)).Sum();
         }
-        private float GetHighTariffVat()
-        {
-
-            BuysService buysService = new BuysService();
-            DrinkService drinkService = new DrinkService();
-
-            List<Buys> allBuys = buysService.GetBuys();
-            List<Drinks> allDrinks = drinkService.GetDrinks();
-
-            DateTime[] dates = GetQuarterFromTo().ToArray();
-            if (dates.Length == 0)
-                return 0f;
-
-            return (from buys in allBuys
-                    join drinks in allDrinks on buys.DrinkId equals drinks.Id
-                    where (drinks.DrinkType == "alcholic" || drinks.Vat == 12) && (buys.SaleDate > dates[0] && buys.SaleDate < dates[1])
-                    select (drinks.Vat / 100) * drinks.Price).Sum();
-        }
-
-
 
         // part d end
     }
