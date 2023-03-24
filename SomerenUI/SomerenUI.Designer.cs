@@ -79,12 +79,17 @@
             this.issupervison = new System.Windows.Forms.ColumnHeader();
             this.label4 = new System.Windows.Forms.Label();
             this.panelcashregister = new System.Windows.Forms.Panel();
-            this.listView2 = new System.Windows.Forms.ListView();
+            this.listViewdrinks = new System.Windows.Forms.ListView();
+            this.drinkname = new System.Windows.Forms.ColumnHeader();
+            this.type = new System.Windows.Forms.ColumnHeader();
+            this.Drinkprice = new System.Windows.Forms.ColumnHeader();
+            this.drinkStock = new System.Windows.Forms.ColumnHeader();
             this.listViewstudentnames = new System.Windows.Forms.ListView();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.fname = new System.Windows.Forms.ColumnHeader();
             this.lname = new System.Windows.Forms.ColumnHeader();
+            this.pictureBox5 = new System.Windows.Forms.PictureBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.checkoutbutton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlDashboard.SuspendLayout();
             this.panelrooms.SuspendLayout();
@@ -179,6 +184,7 @@
             this.cashRegisterToolStripMenuItem.Name = "cashRegisterToolStripMenuItem";
             this.cashRegisterToolStripMenuItem.Size = new System.Drawing.Size(177, 36);
             this.cashRegisterToolStripMenuItem.Text = "Cash Register";
+            this.cashRegisterToolStripMenuItem.Click += new System.EventHandler(this.cashRegisterToolStripMenuItem_Click);
             // 
             // pnlDashboard
             // 
@@ -506,7 +512,8 @@
             // 
             // panelcashregister
             // 
-            this.panelcashregister.Controls.Add(this.listView2);
+            this.panelcashregister.Controls.Add(this.checkoutbutton);
+            this.panelcashregister.Controls.Add(this.listViewdrinks);
             this.panelcashregister.Controls.Add(this.listViewstudentnames);
             this.panelcashregister.Controls.Add(this.pictureBox5);
             this.panelcashregister.Controls.Add(this.label5);
@@ -516,25 +523,63 @@
             this.panelcashregister.Size = new System.Drawing.Size(1742, 994);
             this.panelcashregister.TabIndex = 9;
             // 
-            // listView2
+            // listViewdrinks
             // 
-            this.listView2.Location = new System.Drawing.Point(602, 131);
-            this.listView2.Name = "listView2";
-            this.listView2.Size = new System.Drawing.Size(847, 504);
-            this.listView2.TabIndex = 4;
-            this.listView2.UseCompatibleStateImageBehavior = false;
+            this.listViewdrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.drinkname,
+            this.type,
+            this.Drinkprice,
+            this.drinkStock});
+            this.listViewdrinks.FullRowSelect = true;
+            this.listViewdrinks.Location = new System.Drawing.Point(602, 131);
+            this.listViewdrinks.Name = "listViewdrinks";
+            this.listViewdrinks.Size = new System.Drawing.Size(847, 504);
+            this.listViewdrinks.TabIndex = 4;
+            this.listViewdrinks.UseCompatibleStateImageBehavior = false;
+            this.listViewdrinks.View = System.Windows.Forms.View.Details;
+            // 
+            // drinkname
+            // 
+            this.drinkname.Text = "Drink Name";
+            this.drinkname.Width = 200;
+            // 
+            // type
+            // 
+            this.type.Text = "Drink Type";
+            this.type.Width = 150;
+            // 
+            // Drinkprice
+            // 
+            this.Drinkprice.Text = "Drink Price";
+            this.Drinkprice.Width = 150;
+            // 
+            // drinkStock
+            // 
+            this.drinkStock.Text = "Stock";
+            this.drinkStock.Width = 150;
             // 
             // listViewstudentnames
             // 
             this.listViewstudentnames.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.fname,
             this.lname});
+            this.listViewstudentnames.FullRowSelect = true;
             this.listViewstudentnames.Location = new System.Drawing.Point(24, 131);
             this.listViewstudentnames.Name = "listViewstudentnames";
             this.listViewstudentnames.Size = new System.Drawing.Size(466, 504);
             this.listViewstudentnames.TabIndex = 3;
             this.listViewstudentnames.UseCompatibleStateImageBehavior = false;
             this.listViewstudentnames.View = System.Windows.Forms.View.Details;
+            // 
+            // fname
+            // 
+            this.fname.Text = "First Name";
+            this.fname.Width = 150;
+            // 
+            // lname
+            // 
+            this.lname.Text = "Last Name";
+            this.lname.Width = 150;
             // 
             // pictureBox5
             // 
@@ -557,25 +602,25 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Cash Register";
             // 
-            // fname
+            // checkoutbutton
             // 
-            this.fname.Text = "First Name";
-            this.fname.Width = 150;
-            // 
-            // lname
-            // 
-            this.lname.Text = "Last Name";
-            this.lname.Width = 150;
+            this.checkoutbutton.Location = new System.Drawing.Point(667, 849);
+            this.checkoutbutton.Name = "checkoutbutton";
+            this.checkoutbutton.Size = new System.Drawing.Size(206, 74);
+            this.checkoutbutton.TabIndex = 5;
+            this.checkoutbutton.Text = "Check Out";
+            this.checkoutbutton.UseVisualStyleBackColor = true;
+            this.checkoutbutton.Click += new System.EventHandler(this.checkoutbutton_Click);
             // 
             // SomerenUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1807, 1259);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panelcashregister);
             this.Controls.Add(this.panellecturer);
             this.Controls.Add(this.pnlStudents);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panelrooms);
             this.Controls.Add(this.pnlDashboard);
             this.Controls.Add(this.panelActivity);
@@ -659,11 +704,16 @@
         private System.Windows.Forms.ToolStripMenuItem drinksToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cashRegisterToolStripMenuItem;
         private System.Windows.Forms.Panel panelcashregister;
-        private System.Windows.Forms.ListView listView2;
+        private System.Windows.Forms.ListView listViewdrinks;
         private System.Windows.Forms.ListView listViewstudentnames;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ColumnHeader fname;
         private System.Windows.Forms.ColumnHeader lname;
+        private System.Windows.Forms.ColumnHeader drinkname;
+        private System.Windows.Forms.ColumnHeader type;
+        private System.Windows.Forms.ColumnHeader Drinkprice;
+        private System.Windows.Forms.ColumnHeader drinkStock;
+        private System.Windows.Forms.Button checkoutbutton;
     }
 }
