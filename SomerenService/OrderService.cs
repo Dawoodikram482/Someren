@@ -16,6 +16,11 @@ namespace SomerenService
         {
             ordersdb = new OrderDao();
         }
+
+        public void OrderDrink(Order order)
+        {
+            ordersdb.PurchaseDrink(order);
+        }
         public List<Order> GetOrders()
         {
             List<Order> orders = ordersdb.GetAllOrders();

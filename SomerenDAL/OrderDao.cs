@@ -42,7 +42,12 @@ namespace SomerenDAL
             return orders;
         }
 
-
+        public void PurchaseDrink(Order order)
+        {
+            string query = $"INSERT INTO Purchases (Order_id, Firstname, Lastname, drink_name, drink_type,price,stock,sales,Date_of_Purchase ) VALUES('{order.OrderId}', '{order.FirstName}', '{order.LastName}', '{order.DrinkName}', '{order.DrinkType}', '{order.Price}', '{order.Stock}', '{order.DateTime}');";
+            SqlParameter[] sqlParameters = new SqlParameter[0];
+            ExecuteEditQuery(query, sqlParameters);
+        }
 
     }
 }
