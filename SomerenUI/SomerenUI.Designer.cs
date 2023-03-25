@@ -92,8 +92,8 @@
             label10 = new System.Windows.Forms.Label();
             vatCalcSelectYearCombo = new System.Windows.Forms.ComboBox();
             vatCalcYearSelectLabel = new System.Windows.Forms.Label();
-            pictureBox5 = new System.Windows.Forms.PictureBox();
-            label5 = new System.Windows.Forms.Label();
+            vatCalcPictureBox = new System.Windows.Forms.PictureBox();
+            vatCalcMainLabel = new System.Windows.Forms.Label();
             menuStrip1.SuspendLayout();
             pnlDashboard.SuspendLayout();
             panelrooms.SuspendLayout();
@@ -105,7 +105,7 @@
             panellecturer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
             panelVatCalc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)vatCalcPictureBox).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -475,8 +475,8 @@
             panelVatCalc.Controls.Add(label10);
             panelVatCalc.Controls.Add(vatCalcSelectYearCombo);
             panelVatCalc.Controls.Add(vatCalcYearSelectLabel);
-            panelVatCalc.Controls.Add(pictureBox5);
-            panelVatCalc.Controls.Add(label5);
+            panelVatCalc.Controls.Add(vatCalcPictureBox);
+            panelVatCalc.Controls.Add(vatCalcMainLabel);
             panelVatCalc.Location = new System.Drawing.Point(9, 24);
             panelVatCalc.Name = "panelVatCalc";
             panelVatCalc.Size = new System.Drawing.Size(938, 466);
@@ -623,24 +623,24 @@
             vatCalcYearSelectLabel.TabIndex = 20;
             vatCalcYearSelectLabel.Text = "Select Year:";
             // 
-            // pictureBox5
+            // vatCalcPictureBox
             // 
-            pictureBox5.Image = (System.Drawing.Image)resources.GetObject("pictureBox5.Image");
-            pictureBox5.Location = new System.Drawing.Point(805, 0);
-            pictureBox5.Name = "pictureBox5";
-            pictureBox5.Size = new System.Drawing.Size(130, 123);
-            pictureBox5.TabIndex = 2;
-            pictureBox5.TabStop = false;
+            vatCalcPictureBox.Image = (System.Drawing.Image)resources.GetObject("vatCalcPictureBox.Image");
+            vatCalcPictureBox.Location = new System.Drawing.Point(805, 0);
+            vatCalcPictureBox.Name = "vatCalcPictureBox";
+            vatCalcPictureBox.Size = new System.Drawing.Size(130, 123);
+            vatCalcPictureBox.TabIndex = 2;
+            vatCalcPictureBox.TabStop = false;
             // 
-            // label5
+            // vatCalcMainLabel
             // 
-            label5.AutoSize = true;
-            label5.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            label5.Location = new System.Drawing.Point(12, 5);
-            label5.Name = "label5";
-            label5.Size = new System.Drawing.Size(179, 32);
-            label5.TabIndex = 0;
-            label5.Text = "VAT Calculation";
+            vatCalcMainLabel.AutoSize = true;
+            vatCalcMainLabel.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            vatCalcMainLabel.Location = new System.Drawing.Point(12, 5);
+            vatCalcMainLabel.Name = "vatCalcMainLabel";
+            vatCalcMainLabel.Size = new System.Drawing.Size(179, 32);
+            vatCalcMainLabel.TabIndex = 0;
+            vatCalcMainLabel.Text = "VAT Calculation";
             // 
             // SomerenUI
             // 
@@ -675,7 +675,7 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox4).EndInit();
             panelVatCalc.ResumeLayout(false);
             panelVatCalc.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
+            ((System.ComponentModel.ISupportInitialize)vatCalcPictureBox).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -731,8 +731,8 @@
         private System.Windows.Forms.ColumnHeader age;
         private System.Windows.Forms.ToolStripMenuItem vatToolStripMenuItem;
         private System.Windows.Forms.Panel panelVatCalc;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.PictureBox pictureBox5;
+        private System.Windows.Forms.Label vatCalcMainLabel;
+        private System.Windows.Forms.PictureBox vatCalcPictureBox;
         private System.Windows.Forms.Label totalVatLabel;
         private System.Windows.Forms.Label highTariffVatLabel;
         private System.Windows.Forms.Label lowTariffVatLabel;

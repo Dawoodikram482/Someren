@@ -418,7 +418,7 @@ namespace SomerenUI
             return dates;
         }
 
-        private float GetTariffVat(bool isAlcholic=false)
+        private float GetTariffVat(bool isAlcholic = false)
         {
             VatCalcService vatCalcSerive = new VatCalcService();
 
@@ -427,12 +427,12 @@ namespace SomerenUI
             DateTime[] dates = GetQuarterFromTo().ToArray();
 
             string drinkType = isAlcholic ? "alcholic" : "non-alcholic";
-            decimal vat = isAlcholic ? 0.22m: 0.06m;
+            decimal vat = isAlcholic ? 0.22m : 0.06m;
 
             if (dates.Length == 0)
                 return 0f;
             return (from p in allPurchases
-                    where(p.DrinkType == drinkType) && (p.DateTime > dates[0] && p.DateTime < dates[1])
+                    where (p.DrinkType == drinkType) && (p.DateTime > dates[0] && p.DateTime < dates[1])
                     select (float)(vat * p.Price)).Sum();
         }
 
