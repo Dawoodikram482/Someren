@@ -426,7 +426,7 @@ namespace SomerenUI
 
             DateTime[] dates = GetQuarterFromTo().ToArray();
 
-            string drinkType = isAlcholic ? "alcholic" : "non-alcholic";
+            string drinkType = isAlcholic ? "Alcoholic" : "Non Alcoholic";
             decimal vat = isAlcholic ? 0.22m : 0.06m;
 
             if (dates.Length == 0)
