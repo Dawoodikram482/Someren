@@ -19,7 +19,7 @@ namespace SomerenService
 
         public void OrderDrink(Order order)
         {
-            ordersdb.PurchaseDrink(order);
+            ordersdb.OrderDrink(order);
         }
         public List<Order> GetOrders()
         {

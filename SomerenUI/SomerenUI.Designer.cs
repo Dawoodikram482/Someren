@@ -79,6 +79,7 @@
             this.issupervison = new System.Windows.Forms.ColumnHeader();
             this.label4 = new System.Windows.Forms.Label();
             this.panelcashregister = new System.Windows.Forms.Panel();
+            this.labelshow = new System.Windows.Forms.Label();
             this.cost = new System.Windows.Forms.Label();
             this.checkoutbutton = new System.Windows.Forms.Button();
             this.listViewdrinks = new System.Windows.Forms.ListView();
@@ -86,12 +87,13 @@
             this.type = new System.Windows.Forms.ColumnHeader();
             this.Drinkprice = new System.Windows.Forms.ColumnHeader();
             this.drinkStock = new System.Windows.Forms.ColumnHeader();
+            this.drinkid = new System.Windows.Forms.ColumnHeader();
             this.listViewstudentnames = new System.Windows.Forms.ListView();
+            this.studentid = new System.Windows.Forms.ColumnHeader();
             this.fname = new System.Windows.Forms.ColumnHeader();
             this.lname = new System.Windows.Forms.ColumnHeader();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.labelshow = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             this.pnlDashboard.SuspendLayout();
             this.panelrooms.SuspendLayout();
@@ -527,6 +529,15 @@
             this.panelcashregister.Size = new System.Drawing.Size(1742, 994);
             this.panelcashregister.TabIndex = 9;
             // 
+            // labelshow
+            // 
+            this.labelshow.AutoSize = true;
+            this.labelshow.Location = new System.Drawing.Point(425, 726);
+            this.labelshow.Name = "labelshow";
+            this.labelshow.Size = new System.Drawing.Size(29, 32);
+            this.labelshow.TabIndex = 7;
+            this.labelshow.Text = "...";
+            // 
             // cost
             // 
             this.cost.AutoSize = true;
@@ -544,10 +555,12 @@
             this.checkoutbutton.TabIndex = 5;
             this.checkoutbutton.Text = "Check Out";
             this.checkoutbutton.UseVisualStyleBackColor = true;
+            this.checkoutbutton.Click += new System.EventHandler(this.checkoutbutton_Click_1);
             // 
             // listViewdrinks
             // 
             this.listViewdrinks.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.drinkid,
             this.drinkname,
             this.type,
             this.Drinkprice,
@@ -559,6 +572,7 @@
             this.listViewdrinks.TabIndex = 4;
             this.listViewdrinks.UseCompatibleStateImageBehavior = false;
             this.listViewdrinks.View = System.Windows.Forms.View.Details;
+            this.listViewdrinks.SelectedIndexChanged += new System.EventHandler(this.listViewdrinks_SelectedIndexChanged);
             // 
             // drinkname
             // 
@@ -580,9 +594,15 @@
             this.drinkStock.Text = "Stock";
             this.drinkStock.Width = 150;
             // 
+            // drinkid
+            // 
+            this.drinkid.Text = "Drink Id";
+            this.drinkid.Width = 100;
+            // 
             // listViewstudentnames
             // 
             this.listViewstudentnames.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.studentid,
             this.fname,
             this.lname});
             this.listViewstudentnames.FullRowSelect = true;
@@ -592,6 +612,12 @@
             this.listViewstudentnames.TabIndex = 3;
             this.listViewstudentnames.UseCompatibleStateImageBehavior = false;
             this.listViewstudentnames.View = System.Windows.Forms.View.Details;
+            this.listViewstudentnames.SelectedIndexChanged += new System.EventHandler(this.listViewstudentnames_SelectedIndexChanged);
+            // 
+            // studentid
+            // 
+            this.studentid.Text = "Student Id";
+            this.studentid.Width = 150;
             // 
             // fname
             // 
@@ -623,15 +649,6 @@
             this.label5.Size = new System.Drawing.Size(313, 65);
             this.label5.TabIndex = 0;
             this.label5.Text = "Cash Register";
-            // 
-            // labelshow
-            // 
-            this.labelshow.AutoSize = true;
-            this.labelshow.Location = new System.Drawing.Point(425, 726);
-            this.labelshow.Name = "labelshow";
-            this.labelshow.Size = new System.Drawing.Size(29, 32);
-            this.labelshow.TabIndex = 7;
-            this.labelshow.Text = "...";
             // 
             // SomerenUI
             // 
@@ -738,5 +755,7 @@
         private System.Windows.Forms.Button checkoutbutton;
         private System.Windows.Forms.Label cost;
         private System.Windows.Forms.Label labelshow;
+        private System.Windows.Forms.ColumnHeader drinkid;
+        private System.Windows.Forms.ColumnHeader studentid;
     }
 }

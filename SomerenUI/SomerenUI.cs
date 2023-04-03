@@ -321,6 +321,7 @@ namespace SomerenUI
                 li.SubItems.Add(drink.drinkName.ToString());
                 li.SubItems.Add(drink.drinkType.ToString());
                 li.SubItems.Add(drink.drinkPrice.ToString());
+                li.SubItems.Add(drink.drinkStock.ToString());
 
                 if (drink.drinkStock < 10)
                 {
@@ -345,9 +346,10 @@ namespace SomerenUI
 
             foreach (Student student in students)
             {
-                ListViewItem li = new ListViewItem(student.First_name.ToString());
+                ListViewItem li = new ListViewItem(student.id.ToString());
                 li.Tag = student;   // link student object to listview item
 
+                li.SubItems.Add(student.First_name.ToString());
                 li.SubItems.Add(student.Last_name.ToString());
 
 
@@ -358,8 +360,9 @@ namespace SomerenUI
 
             foreach (Drinks drink in drinks)
             {
-                ListViewItem list = new ListViewItem(drink.drinkName.ToString());
+                ListViewItem list = new ListViewItem(drink.drinkID.ToString());
                 list.Tag = drink;
+                list.SubItems.Add(drink.drinkName.ToString());
                 list.SubItems.Add(drink.drinkType.ToString());
                 list.SubItems.Add(drink.drinkPrice.ToString());
                 list.SubItems.Add(drink.drinkStock.ToString());
@@ -440,15 +443,7 @@ namespace SomerenUI
             ShowCashRegisterPanel();
         }
 
-        private void listViewDrinkList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Enablecheckoutbutton();
-        }
-
-        private void listViewStudentList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Enablecheckoutbutton();
-        }
+        
 
         private void Enablecheckoutbutton()
         {
@@ -456,7 +451,7 @@ namespace SomerenUI
             if (listViewdrinks.SelectedItems.Count > 0 && listViewstudentnames.SelectedItems.Count > 0)
             {
                 
-                int price = int.Parse(listViewdrinks.SelectedItems[0].SubItems[2].Text);
+                int price = int.Parse(listViewdrinks.SelectedItems[0].SubItems[3].Text);
                 labelshow.Text = price.ToString();
                 checkoutbutton.Enabled = true;
                 
@@ -468,22 +463,36 @@ namespace SomerenUI
             }
         }
 
-        private void checkoutbutton_Click(object sender, EventArgs e)
+        private void UnselectListviewItems(ListView listView)
         {
-            string firstname = (listViewstudentnames.SelectedItems[0].SubItems[0].Text);
-            string lastname= (listViewstudentnames.SelectedItems[0].SubItems[1].Text);
-            string drinkname = listViewdrinks.SelectedItems[0].SubItems[0].Text;
-            string drinktype = listViewdrinks.SelectedItems[0].SubItems[1].Text;
-            int drinkprice = int.Parse(listViewdrinks.SelectedItems[0].SubItems[2].Text);
-            int stock = int.Parse(listViewdrinks.SelectedItems[0].SubItems[3].Text);
+            if (listView.SelectedIndices.Count > 0)
+                for (int i = 0; i < listView.SelectedIndices.Count; i++)
+                {
+                    listView.Items[listView.SelectedIndices[i]].Selected = false;
+                }
+        }
+
+        private void listViewdrinks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Enablecheckoutbutton();
+        }
+
+        private void listViewstudentnames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Enablecheckoutbutton();
+        }
+
+        private void checkoutbutton_Click_1(object sender, EventArgs e)
+        {
+
+           
+            int studentId = int.Parse(listViewstudentnames.SelectedItems[0].SubItems[0].Text);
+            int drinkId = int.Parse(listViewdrinks.SelectedItems[0].SubItems[0].Text);
 
             Order order = new Order();
-            order.FirstName = firstname;
-            order.LastName = lastname;
-            order.DrinkName = drinkname;
-            order.DrinkType = drinktype;
-            order.Price = drinkprice;
-            order.Stock = stock;
+            order.StudentId = studentId;
+            order.DrinkId = drinkId;
+           
 
 
             try
@@ -500,15 +509,7 @@ namespace SomerenUI
             }
         }
 
-        private void UnselectListviewItems(ListView listView)
-        {
-            if (listView.SelectedIndices.Count > 0)
-                for (int i = 0; i < listView.SelectedIndices.Count; i++)
-                {
-                    listView.Items[listView.SelectedIndices[i]].Selected = false;
-                }
-        }
-
-      
+        
+       
     }
 }

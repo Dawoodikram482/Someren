@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections;
 using System.IO;
+using System.Diagnostics;
 
 namespace SomerenDAL
 {
@@ -30,21 +31,19 @@ namespace SomerenDAL
             {
                 Order order = new Order()
                 {
-                    FirstName = dr["firstName"].ToString(),
-                    LastName = dr["lastName"].ToString(),
-                    DrinkName = dr["drinkName"].ToString(),
-                    DrinkType = dr["drinkType"].ToString(),
-                    Price = (int)dr["price"],
-                    Stock = (int)dr["stock"],
+                   
+                    StudentId = (int)dr["student_id"],
+                    DrinkId = (int)dr["drink_id"],
+                    OrderDate = DateTime.Parse(dr["Date_of_Purchase"].ToString()),
                 };
                 orders.Add(order);
             }
             return orders;
         }
 
-        public void PurchaseDrink(Order order)
+        public void OrderDrink(Order order)
         {
-            string query = $"INSERT INTO Purchases (Order_id, Firstname, Lastname, drink_name, drink_type,price,stock,sales,Date_of_Purchase ) VALUES('{order.OrderId}', '{order.FirstName}', '{order.LastName}', '{order.DrinkName}', '{order.DrinkType}', '{order.Price}', '{order.Stock}', '{order.DateTime}');";
+            string query = $"INSERT INTO [Order] (drink_id, student_id) VALUES('{order.DrinkId}', '{order.StudentId}');";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             ExecuteEditQuery(query, sqlParameters);
         }

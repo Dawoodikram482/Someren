@@ -9,13 +9,9 @@ namespace SomerenModel
     public class Order
     {
         public int OrderId { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string DrinkName { get; set; }
-        public string DrinkType { get; set; }
-        public int Price { get; set; }
-        public int Stock { get; set; }
-        public DateTime DateTime { get; set; }
-        public int Sales { get; set; }
+        public int StudentId { get; set; }
+        public int DrinkId { get; set; }
+        public DateTime OrderDate { get; set; } = DateTime.Now;
+        
     }
 }
