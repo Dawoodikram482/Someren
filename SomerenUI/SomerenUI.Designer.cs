@@ -65,6 +65,7 @@
             this.activityid = new System.Windows.Forms.ColumnHeader();
             this.name = new System.Windows.Forms.ColumnHeader();
             this.time = new System.Windows.Forms.ColumnHeader();
+            this.stoptime = new System.Windows.Forms.ColumnHeader();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panelActivity = new System.Windows.Forms.Panel();
             this.panellecturer = new System.Windows.Forms.Panel();
@@ -83,11 +84,11 @@
             this.cost = new System.Windows.Forms.Label();
             this.checkoutbutton = new System.Windows.Forms.Button();
             this.listViewdrinks = new System.Windows.Forms.ListView();
+            this.drinkid = new System.Windows.Forms.ColumnHeader();
             this.drinkname = new System.Windows.Forms.ColumnHeader();
             this.type = new System.Windows.Forms.ColumnHeader();
             this.Drinkprice = new System.Windows.Forms.ColumnHeader();
             this.drinkStock = new System.Windows.Forms.ColumnHeader();
-            this.drinkid = new System.Windows.Forms.ColumnHeader();
             this.listViewstudentnames = new System.Windows.Forms.ListView();
             this.studentid = new System.Windows.Forms.ColumnHeader();
             this.fname = new System.Windows.Forms.ColumnHeader();
@@ -383,7 +384,9 @@
             this.listViewActivity.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.activityid,
             this.name,
-            this.time});
+            this.time,
+            this.stoptime});
+            this.listViewActivity.FullRowSelect = true;
             this.listViewActivity.Location = new System.Drawing.Point(30, 90);
             this.listViewActivity.Margin = new System.Windows.Forms.Padding(6);
             this.listViewActivity.Name = "listViewActivity";
@@ -395,17 +398,22 @@
             // activityid
             // 
             this.activityid.Text = "Activity Id";
-            this.activityid.Width = 200;
+            this.activityid.Width = 150;
             // 
             // name
             // 
             this.name.Text = "Activity Name";
-            this.name.Width = 200;
+            this.name.Width = 250;
             // 
             // time
             // 
-            this.time.Text = "Activity Time";
-            this.time.Width = 200;
+            this.time.Text = "Start Time";
+            this.time.Width = 250;
+            // 
+            // stoptime
+            // 
+            this.stoptime.Text = "End Time";
+            this.stoptime.Width = 250;
             // 
             // pictureBox3
             // 
@@ -574,6 +582,11 @@
             this.listViewdrinks.View = System.Windows.Forms.View.Details;
             this.listViewdrinks.SelectedIndexChanged += new System.EventHandler(this.listViewdrinks_SelectedIndexChanged);
             // 
+            // drinkid
+            // 
+            this.drinkid.Text = "Drink Id";
+            this.drinkid.Width = 100;
+            // 
             // drinkname
             // 
             this.drinkname.Text = "Drink Name";
@@ -593,11 +606,6 @@
             // 
             this.drinkStock.Text = "Stock";
             this.drinkStock.Width = 150;
-            // 
-            // drinkid
-            // 
-            this.drinkid.Text = "Drink Id";
-            this.drinkid.Width = 100;
             // 
             // listViewstudentnames
             // 
@@ -656,12 +664,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1807, 1259);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.panelActivity);
             this.Controls.Add(this.panelcashregister);
             this.Controls.Add(this.panellecturer);
             this.Controls.Add(this.pnlStudents);
             this.Controls.Add(this.panelrooms);
             this.Controls.Add(this.pnlDashboard);
-            this.Controls.Add(this.panelActivity);
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SomerenUI";
@@ -757,5 +765,6 @@
         private System.Windows.Forms.Label labelshow;
         private System.Windows.Forms.ColumnHeader drinkid;
         private System.Windows.Forms.ColumnHeader studentid;
+        private System.Windows.Forms.ColumnHeader stoptime;
     }
 }

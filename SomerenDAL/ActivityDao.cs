@@ -13,7 +13,7 @@ namespace SomerenDAL
     {
         public List<Activity> GetAllActivities()
         {
-            string query = "SELECT activity_id,activity_name,activity_time FROM [dbo].[Activity]";
+            string query = "SELECT activity_id,activity_name,start_time,end_time FROM [dbo].[Activity]";
             SqlParameter[] sqlParameters = new SqlParameter[0];
             return ReadTables(ExecuteSelectQuery(query, sqlParameters));
         }
@@ -28,7 +28,10 @@ namespace SomerenDAL
                 {
                     activityID = (int)dr["activity_id"],
                     activityName = dr["activity_name"].ToString(),
-                    activityTime = dr["activity_time"].ToString()
+                    startTime = (DateTime)dr["start_time"],
+                    endTime = (DateTime)dr["end_time"]
+
+
                 };
                 activities.Add(_act);
             }
