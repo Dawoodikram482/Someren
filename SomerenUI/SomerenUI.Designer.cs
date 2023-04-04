@@ -68,6 +68,17 @@
             this.stoptime = new System.Windows.Forms.ColumnHeader();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panelActivity = new System.Windows.Forms.Panel();
+            this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.EndDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.activityNametextBox = new System.Windows.Forms.TextBox();
+            this.activityIdtextBox = new System.Windows.Forms.TextBox();
+            this.Deletebutton = new System.Windows.Forms.Button();
+            this.Addbutton = new System.Windows.Forms.Button();
+            this.Updatebutton = new System.Windows.Forms.Button();
+            this.startTimelabel = new System.Windows.Forms.Label();
+            this.EndTimelabel = new System.Windows.Forms.Label();
+            this.activityNamelabel = new System.Windows.Forms.Label();
+            this.activityIdlabel = new System.Windows.Forms.Label();
             this.panellecturer = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.listViewlecturer = new System.Windows.Forms.ListView();
@@ -427,14 +438,116 @@
             // 
             // panelActivity
             // 
+            this.panelActivity.Controls.Add(this.startDateTimePicker);
+            this.panelActivity.Controls.Add(this.EndDateTimePicker);
+            this.panelActivity.Controls.Add(this.activityNametextBox);
+            this.panelActivity.Controls.Add(this.activityIdtextBox);
+            this.panelActivity.Controls.Add(this.Deletebutton);
+            this.panelActivity.Controls.Add(this.Addbutton);
+            this.panelActivity.Controls.Add(this.Updatebutton);
+            this.panelActivity.Controls.Add(this.startTimelabel);
+            this.panelActivity.Controls.Add(this.EndTimelabel);
+            this.panelActivity.Controls.Add(this.activityNamelabel);
+            this.panelActivity.Controls.Add(this.activityIdlabel);
             this.panelActivity.Controls.Add(this.pictureBox3);
             this.panelActivity.Controls.Add(this.listViewActivity);
             this.panelActivity.Controls.Add(this.label3);
             this.panelActivity.Location = new System.Drawing.Point(22, 52);
             this.panelActivity.Margin = new System.Windows.Forms.Padding(6);
             this.panelActivity.Name = "panelActivity";
-            this.panelActivity.Size = new System.Drawing.Size(1742, 994);
+            this.panelActivity.Size = new System.Drawing.Size(1742, 1168);
             this.panelActivity.TabIndex = 9;
+            // 
+            // startDateTimePicker
+            // 
+            this.startDateTimePicker.Location = new System.Drawing.Point(304, 983);
+            this.startDateTimePicker.Name = "startDateTimePicker";
+            this.startDateTimePicker.Size = new System.Drawing.Size(400, 39);
+            this.startDateTimePicker.TabIndex = 13;
+            // 
+            // EndDateTimePicker
+            // 
+            this.EndDateTimePicker.Location = new System.Drawing.Point(304, 1095);
+            this.EndDateTimePicker.Name = "EndDateTimePicker";
+            this.EndDateTimePicker.Size = new System.Drawing.Size(400, 39);
+            this.EndDateTimePicker.TabIndex = 12;
+            // 
+            // activityNametextBox
+            // 
+            this.activityNametextBox.Location = new System.Drawing.Point(304, 845);
+            this.activityNametextBox.Name = "activityNametextBox";
+            this.activityNametextBox.Size = new System.Drawing.Size(242, 39);
+            this.activityNametextBox.TabIndex = 11;
+            // 
+            // activityIdtextBox
+            // 
+            this.activityIdtextBox.Location = new System.Drawing.Point(304, 759);
+            this.activityIdtextBox.Name = "activityIdtextBox";
+            this.activityIdtextBox.Size = new System.Drawing.Size(242, 39);
+            this.activityIdtextBox.TabIndex = 10;
+            // 
+            // Deletebutton
+            // 
+            this.Deletebutton.Location = new System.Drawing.Point(1206, 1059);
+            this.Deletebutton.Name = "Deletebutton";
+            this.Deletebutton.Size = new System.Drawing.Size(243, 75);
+            this.Deletebutton.TabIndex = 9;
+            this.Deletebutton.Text = "Delete";
+            this.Deletebutton.UseVisualStyleBackColor = true;
+            // 
+            // Addbutton
+            // 
+            this.Addbutton.Location = new System.Drawing.Point(1206, 791);
+            this.Addbutton.Name = "Addbutton";
+            this.Addbutton.Size = new System.Drawing.Size(243, 75);
+            this.Addbutton.TabIndex = 8;
+            this.Addbutton.Text = "Add";
+            this.Addbutton.UseVisualStyleBackColor = true;
+            // 
+            // Updatebutton
+            // 
+            this.Updatebutton.Location = new System.Drawing.Point(1206, 918);
+            this.Updatebutton.Name = "Updatebutton";
+            this.Updatebutton.Size = new System.Drawing.Size(243, 75);
+            this.Updatebutton.TabIndex = 7;
+            this.Updatebutton.Text = "Update";
+            this.Updatebutton.UseVisualStyleBackColor = true;
+            // 
+            // startTimelabel
+            // 
+            this.startTimelabel.AutoSize = true;
+            this.startTimelabel.Location = new System.Drawing.Point(52, 990);
+            this.startTimelabel.Name = "startTimelabel";
+            this.startTimelabel.Size = new System.Drawing.Size(122, 32);
+            this.startTimelabel.TabIndex = 6;
+            this.startTimelabel.Text = "Start Time";
+            // 
+            // EndTimelabel
+            // 
+            this.EndTimelabel.AutoSize = true;
+            this.EndTimelabel.Location = new System.Drawing.Point(52, 1102);
+            this.EndTimelabel.Name = "EndTimelabel";
+            this.EndTimelabel.Size = new System.Drawing.Size(114, 32);
+            this.EndTimelabel.TabIndex = 5;
+            this.EndTimelabel.Text = "End Time";
+            // 
+            // activityNamelabel
+            // 
+            this.activityNamelabel.AutoSize = true;
+            this.activityNamelabel.Location = new System.Drawing.Point(52, 852);
+            this.activityNamelabel.Name = "activityNamelabel";
+            this.activityNamelabel.Size = new System.Drawing.Size(163, 32);
+            this.activityNamelabel.TabIndex = 4;
+            this.activityNamelabel.Text = "Activity Name";
+            // 
+            // activityIdlabel
+            // 
+            this.activityIdlabel.AutoSize = true;
+            this.activityIdlabel.Location = new System.Drawing.Point(52, 759);
+            this.activityIdlabel.Name = "activityIdlabel";
+            this.activityIdlabel.Size = new System.Drawing.Size(112, 32);
+            this.activityIdlabel.TabIndex = 3;
+            this.activityIdlabel.Text = "ActivityId";
             // 
             // panellecturer
             // 
@@ -766,5 +879,16 @@
         private System.Windows.Forms.ColumnHeader drinkid;
         private System.Windows.Forms.ColumnHeader studentid;
         private System.Windows.Forms.ColumnHeader stoptime;
+        private System.Windows.Forms.DateTimePicker startDateTimePicker;
+        private System.Windows.Forms.DateTimePicker EndDateTimePicker;
+        private System.Windows.Forms.TextBox activityNametextBox;
+        private System.Windows.Forms.TextBox activityIdtextBox;
+        private System.Windows.Forms.Button Deletebutton;
+        private System.Windows.Forms.Button Addbutton;
+        private System.Windows.Forms.Button Updatebutton;
+        private System.Windows.Forms.Label startTimelabel;
+        private System.Windows.Forms.Label EndTimelabel;
+        private System.Windows.Forms.Label activityNamelabel;
+        private System.Windows.Forms.Label activityIdlabel;
     }
 }

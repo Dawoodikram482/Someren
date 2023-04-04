@@ -510,7 +510,6 @@ namespace SomerenUI
             }
         }
 
-        
-       
+      
     }
 }
