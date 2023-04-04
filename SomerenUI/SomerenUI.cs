@@ -3,8 +3,13 @@ using SomerenModel;
 using System.Windows.Forms;
 using System.Collections.Generic;
 using System;
+
 using System.Linq;
 using System.Globalization;
+
+using System.Diagnostics;
+using Activity = SomerenModel.Activity;
+
 
 namespace SomerenUI
 {
@@ -24,7 +29,12 @@ namespace SomerenUI
             panelrooms.Hide();
             panelActivity.Hide();
             panellecturer.Hide();
+
             panelVatCalc.Hide();
+
+
+            paneldrinks.Hide();
+
 
             // show dashboard
             pnlDashboard.Show();
@@ -38,7 +48,11 @@ namespace SomerenUI
             panelrooms.Hide();
             panelActivity.Hide();
             panellecturer.Hide();
+
             panelVatCalc.Hide();
+
+            paneldrinks.Hide();
+
 
             // show students
             pnlStudents.Show();
@@ -101,7 +115,11 @@ namespace SomerenUI
             panelActivity.Hide();
             panellecturer.Hide();
             pnlStudents.Hide();
+
             panelVatCalc.Hide();
+
+
+            paneldrinks.Hide();
 
 
             // show all rooms
@@ -171,7 +189,11 @@ namespace SomerenUI
             pnlStudents.Hide();
             panelrooms.Hide();
             panellecturer.Hide();
+
             panelVatCalc.Hide();
+
+            paneldrinks.Hide();
+
 
             //show all activity
             panelActivity.Show();
@@ -256,7 +278,12 @@ namespace SomerenUI
             pnlStudents.Hide();
             panelrooms.Hide();
             panelActivity.Hide();
+
             panelVatCalc.Hide();
+
+            paneldrinks.Hide();
+
+
 
             //show all activity
             panellecturer.Show();
@@ -273,6 +300,7 @@ namespace SomerenUI
                 MessageBox.Show("Something went wrong while loading the teachers: " + e.Message);
             }
         }
+
 
         // VAT Calculation - part d start
         private void ShowVatCalculationPanel()
@@ -316,6 +344,72 @@ namespace SomerenUI
 
         // part D end
 
+
+        //Drinks part
+
+        private List<Drinks> GetDrinks()
+        {
+            DrinkService drinkService = new DrinkService();
+            List<Drinks> drinks = drinkService.GetDrinks();
+            return drinks;
+        }
+        private void ShowDrinkPanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+            panelActivity.Hide();
+            panellecturer.Hide();
+            pnlStudents.Hide();
+            panelrooms.Hide();
+
+
+            // show all rooms
+            paneldrinks.Show();
+
+            try
+            {
+                // get and display all rooms
+                List<Drinks> drinks = GetDrinks();
+                DisplayDrinks(drinks);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the drinks: " + e.Message);
+            }
+        }
+
+        private void DisplayDrinks(List<Drinks> drinks)
+        {
+            //clear the listview before filling it
+            listViewdrinks.Items.Clear();
+
+            foreach (Drinks drink in drinks)
+            {
+                ListViewItem li = new ListViewItem(drink.drinkID.ToString());
+                li.Tag = drink;   // link student object to listview item
+
+
+                li.SubItems.Add(drink.drinkName.ToString());
+                li.SubItems.Add(drink.drinkType.ToString());
+                li.SubItems.Add(drink.drinkPrice.ToString());
+
+                if (drink.drinkStock < 10)
+                {
+                    li.SubItems.Add("'Stock nearly depleted");
+                }
+                else
+                {
+                    li.SubItems.Add("Stock sufficient");
+                }
+
+
+
+
+                listViewdrinks.Items.Add(li);
+            }
+        }
+
+
         private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
         {
             ShowDashboardPanel();
@@ -347,6 +441,7 @@ namespace SomerenUI
         {
             ShowTeachersPanel();
         }
+
 
         // part D start
         private void vatToolStripMenuItem_Click(object sender, EventArgs e)
@@ -437,5 +532,13 @@ namespace SomerenUI
         }
 
         // part d end
+
+        private void DrinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDrinkPanel();
+        }
+
+
+
     }
 }
