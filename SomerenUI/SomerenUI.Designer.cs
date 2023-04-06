@@ -106,6 +106,7 @@
             this.lname = new System.Windows.Forms.ColumnHeader();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.Refreshbutton = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pnlDashboard.SuspendLayout();
             this.panelrooms.SuspendLayout();
@@ -405,6 +406,7 @@
             this.listViewActivity.TabIndex = 1;
             this.listViewActivity.UseCompatibleStateImageBehavior = false;
             this.listViewActivity.View = System.Windows.Forms.View.Details;
+            this.listViewActivity.SelectedIndexChanged += new System.EventHandler(this.listViewActivity_SelectedIndexChanged);
             // 
             // activityid
             // 
@@ -438,6 +440,7 @@
             // 
             // panelActivity
             // 
+            this.panelActivity.Controls.Add(this.Refreshbutton);
             this.panelActivity.Controls.Add(this.startDateTimePicker);
             this.panelActivity.Controls.Add(this.EndDateTimePicker);
             this.panelActivity.Controls.Add(this.activityNametextBox);
@@ -460,58 +463,66 @@
             // 
             // startDateTimePicker
             // 
+            this.startDateTimePicker.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            this.startDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startDateTimePicker.Location = new System.Drawing.Point(304, 983);
             this.startDateTimePicker.Name = "startDateTimePicker";
-            this.startDateTimePicker.Size = new System.Drawing.Size(400, 39);
+            this.startDateTimePicker.Size = new System.Drawing.Size(294, 39);
             this.startDateTimePicker.TabIndex = 13;
             // 
             // EndDateTimePicker
             // 
+            this.EndDateTimePicker.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            this.EndDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.EndDateTimePicker.Location = new System.Drawing.Point(304, 1095);
             this.EndDateTimePicker.Name = "EndDateTimePicker";
-            this.EndDateTimePicker.Size = new System.Drawing.Size(400, 39);
+            this.EndDateTimePicker.Size = new System.Drawing.Size(294, 39);
             this.EndDateTimePicker.TabIndex = 12;
             // 
             // activityNametextBox
             // 
             this.activityNametextBox.Location = new System.Drawing.Point(304, 845);
             this.activityNametextBox.Name = "activityNametextBox";
-            this.activityNametextBox.Size = new System.Drawing.Size(242, 39);
+            this.activityNametextBox.Size = new System.Drawing.Size(193, 39);
             this.activityNametextBox.TabIndex = 11;
             // 
             // activityIdtextBox
             // 
             this.activityIdtextBox.Location = new System.Drawing.Point(304, 759);
             this.activityIdtextBox.Name = "activityIdtextBox";
-            this.activityIdtextBox.Size = new System.Drawing.Size(242, 39);
+            this.activityIdtextBox.ReadOnly = true;
+            this.activityIdtextBox.Size = new System.Drawing.Size(193, 39);
             this.activityIdtextBox.TabIndex = 10;
             // 
             // Deletebutton
             // 
-            this.Deletebutton.Location = new System.Drawing.Point(1206, 1059);
+            this.Deletebutton.Location = new System.Drawing.Point(976, 1059);
             this.Deletebutton.Name = "Deletebutton";
             this.Deletebutton.Size = new System.Drawing.Size(243, 75);
             this.Deletebutton.TabIndex = 9;
             this.Deletebutton.Text = "Delete";
             this.Deletebutton.UseVisualStyleBackColor = true;
+            this.Deletebutton.Click += new System.EventHandler(this.Deletebutton_Click);
             // 
             // Addbutton
             // 
-            this.Addbutton.Location = new System.Drawing.Point(1206, 791);
+            this.Addbutton.Location = new System.Drawing.Point(976, 759);
             this.Addbutton.Name = "Addbutton";
             this.Addbutton.Size = new System.Drawing.Size(243, 75);
             this.Addbutton.TabIndex = 8;
             this.Addbutton.Text = "Add";
             this.Addbutton.UseVisualStyleBackColor = true;
+            this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
             // 
             // Updatebutton
             // 
-            this.Updatebutton.Location = new System.Drawing.Point(1206, 918);
+            this.Updatebutton.Location = new System.Drawing.Point(976, 919);
             this.Updatebutton.Name = "Updatebutton";
             this.Updatebutton.Size = new System.Drawing.Size(243, 75);
             this.Updatebutton.TabIndex = 7;
             this.Updatebutton.Text = "Update";
             this.Updatebutton.UseVisualStyleBackColor = true;
+            this.Updatebutton.Click += new System.EventHandler(this.Updatebutton_Click);
             // 
             // startTimelabel
             // 
@@ -771,6 +782,16 @@
             this.label5.TabIndex = 0;
             this.label5.Text = "Cash Register";
             // 
+            // Refreshbutton
+            // 
+            this.Refreshbutton.Location = new System.Drawing.Point(1276, 759);
+            this.Refreshbutton.Name = "Refreshbutton";
+            this.Refreshbutton.Size = new System.Drawing.Size(173, 75);
+            this.Refreshbutton.TabIndex = 14;
+            this.Refreshbutton.Text = "Refresh";
+            this.Refreshbutton.UseVisualStyleBackColor = true;
+            this.Refreshbutton.Click += new System.EventHandler(this.Refreshbutton_Click);
+            // 
             // SomerenUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -890,5 +911,6 @@
         private System.Windows.Forms.Label EndTimelabel;
         private System.Windows.Forms.Label activityNamelabel;
         private System.Windows.Forms.Label activityIdlabel;
+        private System.Windows.Forms.Button Refreshbutton;
     }
 }

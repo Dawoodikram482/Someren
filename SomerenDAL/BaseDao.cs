@@ -8,7 +8,7 @@ namespace SomerenDAL
     public abstract class BaseDao
     {
         private SqlDataAdapter adapter;
-        private SqlConnection conn;
+        public SqlConnection conn;
 
         public BaseDao()
         {
