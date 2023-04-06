@@ -24,14 +24,17 @@ namespace SomerenService
         }
         public void AddActivity(Activity activity)
         {
+            //calling the adding method from dao
             activityDb.AddActivity(activity);
         }
         public void RemoveActivity(Activity activity)
         {
+            //calling the deletion method from dao
             activityDb.DeleteActivity(activity);
         }
         public void UpdateActivity(Activity activity)
         {
+            //calling the updating method from dao
             activityDb.UpdateActivity(activity);
         }
     }
