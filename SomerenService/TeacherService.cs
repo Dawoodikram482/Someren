@@ -22,6 +22,27 @@ namespace SomerenService
             List<Teacher> teachers = teacherDb.GetAllTeachers();
             return teachers;
         }
+
+        public List<Teacher> GetASTeachers(bool isSelected, int activityId)
+        {
+            List<Teacher> teachers = teacherDb.GetAllASTeachers(isSelected, activityId);
+            return teachers;
+        }
+
+        public bool CheckAlreadyExist(int LecturerID, int ActivityID)
+        {
+            return teacherDb.CheckAlreadyExist(LecturerID, ActivityID);
+        }
+
+        public void AddSupervisor(int LecturerID, int ActivityID)
+        {
+            teacherDb.AddSupervisor(LecturerID, ActivityID);
+        }
+
+        public void RemoveSupervisor(int LecturerID, int ActivityID)
+        {
+            teacherDb.RemoveSupervisor(LecturerID, ActivityID);
+        }
     }
 
 }

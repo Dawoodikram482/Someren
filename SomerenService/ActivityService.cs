@@ -1,10 +1,6 @@
 ﻿using SomerenDAL;
 using SomerenModel;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SomerenService
 {
@@ -20,6 +16,12 @@ namespace SomerenService
         public List<Activity> GetActivities()
         {
             List<Activity> activities = activityDb.GetAllActivities();
+            return activities;
+        }
+
+        public List<Activity> GetASActivities()
+        {
+            List<Activity> activities = activityDb.GetAllASActivities();
             return activities;
         }
     }

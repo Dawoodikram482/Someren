@@ -6,6 +6,7 @@ using System;
 using System.Diagnostics;
 using Activity = SomerenModel.Activity;
 using System.Data.SqlClient;
+using System.Drawing;
 
 namespace SomerenUI
 {
@@ -26,6 +27,7 @@ namespace SomerenUI
             panelActivity.Hide();
             panellecturer.Hide();
             panelcashregister.Hide();
+            panelAS.Hide();
             // paneldrinks.Hide();
 
             // show dashboard
@@ -41,6 +43,7 @@ namespace SomerenUI
             panelActivity.Hide();
             panellecturer.Hide();
             panelcashregister.Hide();
+            panelAS.Hide();
 
             // show students
             pnlStudents.Show();
@@ -104,6 +107,7 @@ namespace SomerenUI
             panellecturer.Hide();
             pnlStudents.Hide();
             panelcashregister.Hide();
+            panelAS.Hide();
 
             // show all rooms
             panelrooms.Show();
@@ -173,6 +177,7 @@ namespace SomerenUI
             panelrooms.Hide();
             panellecturer.Hide();
             panelcashregister.Hide();
+            panelAS.Hide();
 
             //show all activity
             panelActivity.Show();
@@ -259,6 +264,7 @@ namespace SomerenUI
             panelrooms.Hide();
             panelActivity.Hide();
             panelcashregister.Hide();
+            panelAS.Hide();
 
             //show all activity
             panellecturer.Show();
@@ -510,7 +516,169 @@ namespace SomerenUI
             }
         }
 
-        
-       
+        private void activitySupervisorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            panelrooms.Hide();
+            panelActivity.Hide();
+            panelcashregister.Hide();
+            panelAS.Hide();
+
+            ShowActivitySupervisor();
+        }
+
+        private void ShowActivitySupervisor()
+        {
+            panelAS.Show();
+            buttonAddRemoveSuper.Visible = false;
+
+            try
+            {
+                List<Activity> activities = GetASActivities();
+                DisplayASActivities(activities);
+
+                List<Teacher> selectedSupervisors = GetSupervisors(true, 0);
+                DisplaySupervisors(selectedSupervisors, true);
+
+                List<Teacher> notSelectedSupervisors = GetSupervisors(false, 0);
+                DisplaySupervisors(notSelectedSupervisors, false);
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show("Something went wrong while loading the activities supervisors: " + e.Message);
+            }
+        }
+
+        private List<Teacher> GetSupervisors(bool isSelected, int activityId)
+        {
+            TeacherService teacherService = new TeacherService();
+            List<Teacher> teachers = teacherService.GetASTeachers(isSelected, activityId);
+            return teachers;
+        }
+
+        private List<Activity> GetASActivities()
+        {
+            ActivityService activityService = new ActivityService();
+            List<Activity> activities = activityService.GetASActivities();
+            return activities;
+        }
+
+        private void DisplayASActivities(List<Activity> activities)
+        {
+            // clear the listview before filling it
+            listViewASactivities.Items.Clear();
+            listViewASactivities.View = View.Details;
+
+            foreach (Activity activity in activities)
+            {
+                string[] arr = new string[4];
+
+                arr[0] = activity.activityID.ToString();
+                arr[1] = activity.activityName.ToString();
+                arr[2] = activity.startTime.ToString();
+                arr[3] = activity.endTime.ToString();
+
+                listViewASactivities.Items.Add(new ListViewItem(arr));
+            }
+
+        }
+
+        private void DisplaySupervisors(List<Teacher> teachers, bool isSelected)
+        {
+            if (isSelected)
+            {
+                listViewASLecturerS.Items.Clear();
+                listViewASLecturerS.View = View.Details;
+            }
+            else
+            {
+                listViewASLecturerNS.Items.Clear();
+                listViewASLecturerNS.View = View.Details;
+            }
+
+            foreach (Teacher teacher in teachers)
+            {
+                string[] arr = new string[7];
+
+                arr[0] = teacher.Id.ToString();
+                arr[1] = teacher.FirstName;
+                arr[2] = teacher.LastName;
+                arr[3] = teacher.PhoneNumber.ToString();
+                arr[4] = teacher.Age.ToString();
+
+                if (isSelected)
+                {
+                    listViewASLecturerS.Items.Add(new ListViewItem(arr));
+                }
+                else
+                {
+                    listViewASLecturerNS.Items.Add(new ListViewItem(arr));
+                }
+            }
+        }
+
+        private void listViewASLecturerS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UnselectListviewItems(listViewASLecturerNS);
+            buttonAddRemoveSuper.Visible = true;
+            buttonAddRemoveSuper.BackColor = Color.DarkRed;
+            buttonAddRemoveSuper.Text = "Remove";
+        }
+
+        private void listViewASLecturerNS_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            UnselectListviewItems(listViewASLecturerS);
+            buttonAddRemoveSuper.Visible = true;
+            buttonAddRemoveSuper.BackColor = Color.DarkGreen;
+            buttonAddRemoveSuper.Text = "Add";
+        }
+
+        private void buttonAddRemoveSuper_Click(object sender, EventArgs e)
+        {
+            TeacherService teacherService = new TeacherService();
+            if (buttonAddRemoveSuper.Text == "Remove")
+            {
+                DialogResult messageBoxResult = MessageBox.Show("Are you sure?", "Delete Confirmation", MessageBoxButtons.YesNo);
+                if (messageBoxResult == DialogResult.Yes)
+                {
+                    int lecturerId = int.Parse(listViewASLecturerS.SelectedItems[0].SubItems[0].Text);
+                    int activityId = int.Parse(listViewASactivities.SelectedItems[0].SubItems[0].Text);
+                    if (teacherService.CheckAlreadyExist(lecturerId, activityId))
+                    {
+                        teacherService.RemoveSupervisor(lecturerId, activityId);
+                    }
+                    ShowActivitySupervisor();
+                }
+            }
+            else
+            {
+                int lecturerId = int.Parse(listViewASLecturerNS.SelectedItems[0].SubItems[0].Text);
+                int activityId = int.Parse(listViewASactivities.SelectedItems[0].SubItems[0].Text);
+                if (!teacherService.CheckAlreadyExist(lecturerId, activityId))
+                {
+                    teacherService.AddSupervisor(lecturerId, activityId);
+                }
+                else
+                {
+                    MessageBox.Show("This supervisor already assigned to this activity!");
+                }
+                ShowActivitySupervisor();
+            }
+        }
+
+        private void listViewASactivities_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (listViewASactivities.SelectedItems.Count == 0)
+                return;
+            int activityId = int.Parse(listViewASactivities.SelectedItems[0].SubItems[0].Text);
+
+            List<Teacher> selectedSupervisors = GetSupervisors(true, activityId);
+            DisplaySupervisors(selectedSupervisors, true);
+
+            List<Teacher> notSelectedSupervisors = GetSupervisors(false, activityId);
+            DisplaySupervisors(notSelectedSupervisors, false);
+        }
     }
 }
