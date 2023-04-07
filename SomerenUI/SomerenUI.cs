@@ -7,11 +7,14 @@ using System.Diagnostics;
 using Activity = SomerenModel.Activity;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Data;
+using System.Configuration;
 
 namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SomerenDatabase"].ConnectionString);
         public SomerenUI()
         {
             InitializeComponent();
@@ -31,6 +34,7 @@ namespace SomerenUI
             panelAS.Hide();
             pnlActivitiesTimetable.Hide();
             // paneldrinks.Hide();
+            pnlActivityParticipants.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -47,6 +51,7 @@ namespace SomerenUI
             panelcashregister.Hide();
             panelAS.Hide();
             pnlActivitiesTimetable.Hide();
+            pnlActivityParticipants.Hide();
 
             // show students
             pnlStudents.Show();
@@ -112,6 +117,7 @@ namespace SomerenUI
             panelcashregister.Hide();
             panelAS.Hide();
             pnlActivitiesTimetable.Hide();
+            pnlActivityParticipants.Hide();
 
             // show all rooms
             panelrooms.Show();
@@ -183,6 +189,7 @@ namespace SomerenUI
             panelcashregister.Hide();
             panelAS.Hide();
             pnlActivitiesTimetable.Hide();
+            pnlActivityParticipants.Hide();
 
             //show all activity
             panelActivity.Show();
@@ -271,6 +278,7 @@ namespace SomerenUI
             panelcashregister.Hide();
             panelAS.Hide();
             pnlActivitiesTimetable.Hide();
+            pnlActivityParticipants.Hide();
 
             //show all activity
             panellecturer.Show();
@@ -303,6 +311,7 @@ namespace SomerenUI
             panellecturer.Hide();
             pnlStudents.Hide();
             panelrooms.Hide();
+            pnlActivityParticipants.Hide();
 
 
             // show all rooms
@@ -393,6 +402,7 @@ namespace SomerenUI
             panellecturer.Hide();
             pnlStudents.Hide();
             panelrooms.Hide();
+            pnlActivityParticipants.Hide();
 
 
 
@@ -418,11 +428,11 @@ namespace SomerenUI
 
             if (listViewdrinks.SelectedItems.Count > 0 && listViewstudentnames.SelectedItems.Count > 0)
             {
-                
+
                 int price = int.Parse(listViewdrinks.SelectedItems[0].SubItems[3].Text);
                 labelshow.Text = price.ToString();
                 checkoutbutton.Enabled = true;
-                
+
             }
             else
             {
@@ -444,14 +454,14 @@ namespace SomerenUI
         private void checkoutbutton_Click_1(object sender, EventArgs e)
         {
 
-           
+
             int studentId = int.Parse(listViewstudentnames.SelectedItems[0].SubItems[0].Text);
             int drinkId = int.Parse(listViewdrinks.SelectedItems[0].SubItems[0].Text);
 
             Order order = new Order();
             order.StudentId = studentId;
             order.DrinkId = drinkId;
-           
+
 
 
             try
@@ -628,6 +638,7 @@ namespace SomerenUI
             panelcashregister.Hide();
             panelAS.Hide();
             pnlActivitiesTimetable.Hide();
+            pnlActivityParticipants.Hide();
 
             ShowActivitySupervisor();
         }
@@ -799,6 +810,7 @@ namespace SomerenUI
             panelcashregister.Hide();
             panelAS.Hide();
             pnlActivitiesTimetable.Hide();
+            pnlActivityParticipants.Hide();
 
             pnlActivitiesTimetable.Show();
             GenerateWeeklyPanels(DateTime.Today);
@@ -810,7 +822,7 @@ namespace SomerenUI
 
             DateTime startDate = CurrentWeekDays(date);
 
-            WeeklyTimetableService weeklyTimetableService  = new WeeklyTimetableService();
+            WeeklyTimetableService weeklyTimetableService = new WeeklyTimetableService();
 
             for (int i = 0; i < 5; i++)
             {
@@ -913,8 +925,50 @@ namespace SomerenUI
             Enablecheckoutbutton();
         }
 
-       
+        //Participants
 
-       
+
+        public void showGridData()
+        {
+            SqlDataAdapter da = new SqlDataAdapter("SELECT  [ParticipantID],[NonParticipantName],[ParticipantsName],[activity_name] FROM [dbo].[Participant] left join [Activity] on [Participant].[activity_id] = [Activity].activity_id", "server = grasshoppersdatabase4.database.windows.net; database = GrassHoppersDataBase; UID = GrasshopperGroup; password = IFKRGroup5project3");
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Participant");
+            dataGridView1.DataSource = ds.Tables["Participant"].DefaultView;
+
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            panelrooms.Hide();
+            panelActivity.Hide();
+            panelcashregister.Hide();
+            panellecturer.Hide();
+
+            pnlActivityParticipants.Show();
+        }
+
+        private void btnadd_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd2 = new SqlCommand("Insert into Participant (ParticipantsName) Values (@ParticipantsName)", conn);
+            cmd2.Parameters.AddWithValue("ParticipantsName", txtbxinput.Text);
+            conn.Open();
+            cmd2.ExecuteNonQuery();
+            conn.Close();
+            showGridData();
+        }
+
+        private void btnrmv_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd2 = new SqlCommand("delete from Participant where ParticipantsName=@ParticipantsName", conn);
+            cmd2.Parameters.AddWithValue("ParticipantsName", txtbxinput.Text);
+            conn.Open();
+            cmd2.ExecuteNonQuery();
+            conn.Close();
+            showGridData();
+        }
+
+        private void activityParticipantsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showGridData();
+        }
     }
 }
