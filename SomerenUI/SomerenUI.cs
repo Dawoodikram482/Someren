@@ -28,6 +28,7 @@ namespace SomerenUI
             panellecturer.Hide();
             panelcashregister.Hide();
             panelAS.Hide();
+            pnlActivitiesTimetable.Hide();
             // paneldrinks.Hide();
 
             // show dashboard
@@ -44,6 +45,7 @@ namespace SomerenUI
             panellecturer.Hide();
             panelcashregister.Hide();
             panelAS.Hide();
+            pnlActivitiesTimetable.Hide();
 
             // show students
             pnlStudents.Show();
@@ -108,6 +110,7 @@ namespace SomerenUI
             pnlStudents.Hide();
             panelcashregister.Hide();
             panelAS.Hide();
+            pnlActivitiesTimetable.Hide();
 
             // show all rooms
             panelrooms.Show();
@@ -178,6 +181,7 @@ namespace SomerenUI
             panellecturer.Hide();
             panelcashregister.Hide();
             panelAS.Hide();
+            pnlActivitiesTimetable.Hide();
 
             //show all activity
             panelActivity.Show();
@@ -265,6 +269,7 @@ namespace SomerenUI
             panelActivity.Hide();
             panelcashregister.Hide();
             panelAS.Hide();
+            pnlActivitiesTimetable.Hide();
 
             //show all activity
             panellecturer.Show();
@@ -525,6 +530,7 @@ namespace SomerenUI
             panelActivity.Hide();
             panelcashregister.Hide();
             panelAS.Hide();
+            pnlActivitiesTimetable.Hide();
 
             ShowActivitySupervisor();
         }
@@ -679,6 +685,85 @@ namespace SomerenUI
 
             List<Teacher> notSelectedSupervisors = GetSupervisors(false, activityId);
             DisplaySupervisors(notSelectedSupervisors, false);
+        }
+
+        private void activitiesTimetableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowWeeklyTimetablePanel();
+        }
+
+        private void ShowWeeklyTimetablePanel()
+        {
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            panelrooms.Hide();
+            panelActivity.Hide();
+            panelcashregister.Hide();
+            panelAS.Hide();
+            pnlActivitiesTimetable.Hide();
+
+            pnlActivitiesTimetable.Show();
+            GenerateWeeklyPanels(DateTime.Today);
+        }
+
+        private void GenerateWeeklyPanels(DateTime date)
+        {
+            flowLayoutPanelWTT.Controls.Clear();
+
+            DateTime startDate = CurrentWeekDays(date);
+
+            WeeklyTimetableService weeklyTimetableService  = new WeeklyTimetableService();
+
+            for (int i = 0; i < 5; i++)
+            {
+                List<string> activities = weeklyTimetableService.GetWeeklyActivities(startDate.AddDays(i));
+                WeeklyTimetableControl userControl = new WeeklyTimetableControl(
+                    startDate.AddDays(i).ToString("MMMM d, yyyy"),
+                    startDate.AddDays(i).DayOfWeek.ToString(),
+                    activities
+                );
+
+                userControl.AutoSize = false;
+                userControl.Width = 138;
+
+                flowLayoutPanelWTT.Controls.Add(userControl);
+            }
+        }
+
+        private DateTime CurrentWeekDays(DateTime date)
+        {
+            DateTime today = date;
+
+            int diff = (7 + (today.DayOfWeek - DayOfWeek.Monday)) % 7;
+
+            DateTime startOfWeek = today.AddDays(-1 * diff).Date;
+            if (startOfWeek.DayOfWeek == DayOfWeek.Saturday)
+            {
+                startOfWeek = startOfWeek.AddDays(2).Date;
+            }
+            else if (startOfWeek.DayOfWeek == DayOfWeek.Sunday)
+            {
+                startOfWeek = startOfWeek.AddDays(1).Date;
+            }
+
+            DateTime endOfWeek = startOfWeek.AddDays(4).Date;
+            if (endOfWeek.DayOfWeek == DayOfWeek.Saturday)
+            {
+                endOfWeek = endOfWeek.AddDays(-1).Date;
+            }
+            else if (endOfWeek.DayOfWeek == DayOfWeek.Sunday)
+            {
+                endOfWeek = endOfWeek.AddDays(-2).Date;
+            }
+
+            return startOfWeek;
+        }
+
+        private void dateTimePickerFilterWActivities_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime date = dateTimePickerFilterWActivities.Value.Date;
+            GenerateWeeklyPanels(date);
         }
     }
 }

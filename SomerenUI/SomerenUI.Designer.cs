@@ -40,6 +40,7 @@
             this.drinksToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cashRegisterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.activitySupervisorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.activitiesTimetableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnlDashboard = new System.Windows.Forms.Panel();
             this.lblDashboard = new System.Windows.Forms.Label();
             this.panelrooms = new System.Windows.Forms.Panel();
@@ -120,6 +121,12 @@
             this.columnHeader13 = new System.Windows.Forms.ColumnHeader();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.labelAS = new System.Windows.Forms.Label();
+            this.pnlActivitiesTimetable = new System.Windows.Forms.Panel();
+            this.dateTimePickerFilterWActivities = new System.Windows.Forms.DateTimePicker();
+            this.labelWeekFilter = new System.Windows.Forms.Label();
+            this.pictureBox6 = new System.Windows.Forms.PictureBox();
+            this.labelWeeklytt = new System.Windows.Forms.Label();
+            this.flowLayoutPanelWTT = new System.Windows.Forms.FlowLayoutPanel();
             this.menuStrip1.SuspendLayout();
             this.pnlDashboard.SuspendLayout();
             this.panelrooms.SuspendLayout();
@@ -134,6 +141,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             this.panelAS.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            this.pnlActivitiesTimetable.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -147,7 +156,8 @@
             this.roomsToolStripMenuItem,
             this.drinksToolStripMenuItem,
             this.cashRegisterToolStripMenuItem,
-            this.activitySupervisorToolStripMenuItem});
+            this.activitySupervisorToolStripMenuItem,
+            this.activitiesTimetableToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(738, 24);
@@ -224,6 +234,13 @@
             this.activitySupervisorToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
             this.activitySupervisorToolStripMenuItem.Text = "Activity Supervisor";
             this.activitySupervisorToolStripMenuItem.Click += new System.EventHandler(this.activitySupervisorToolStripMenuItem_Click);
+            // 
+            // activitiesTimetableToolStripMenuItem
+            // 
+            this.activitiesTimetableToolStripMenuItem.Name = "activitiesTimetableToolStripMenuItem";
+            this.activitiesTimetableToolStripMenuItem.Size = new System.Drawing.Size(122, 20);
+            this.activitiesTimetableToolStripMenuItem.Text = "Activities Timetable";
+            this.activitiesTimetableToolStripMenuItem.Click += new System.EventHandler(this.activitiesTimetableToolStripMenuItem_Click);
             // 
             // pnlDashboard
             // 
@@ -866,11 +883,67 @@
             this.labelAS.TabIndex = 0;
             this.labelAS.Text = "Activity Supervisor";
             // 
+            // pnlActivitiesTimetable
+            // 
+            this.pnlActivitiesTimetable.Controls.Add(this.dateTimePickerFilterWActivities);
+            this.pnlActivitiesTimetable.Controls.Add(this.labelWeekFilter);
+            this.pnlActivitiesTimetable.Controls.Add(this.pictureBox6);
+            this.pnlActivitiesTimetable.Controls.Add(this.labelWeeklytt);
+            this.pnlActivitiesTimetable.Controls.Add(this.flowLayoutPanelWTT);
+            this.pnlActivitiesTimetable.Location = new System.Drawing.Point(2, 24);
+            this.pnlActivitiesTimetable.Name = "pnlActivitiesTimetable";
+            this.pnlActivitiesTimetable.Size = new System.Drawing.Size(733, 326);
+            this.pnlActivitiesTimetable.TabIndex = 35;
+            // 
+            // dateTimePickerFilterWActivities
+            // 
+            this.dateTimePickerFilterWActivities.Location = new System.Drawing.Point(100, 58);
+            this.dateTimePickerFilterWActivities.Name = "dateTimePickerFilterWActivities";
+            this.dateTimePickerFilterWActivities.Size = new System.Drawing.Size(200, 23);
+            this.dateTimePickerFilterWActivities.TabIndex = 5;
+            this.dateTimePickerFilterWActivities.ValueChanged += new System.EventHandler(this.dateTimePickerFilterWActivities_ValueChanged);
+            // 
+            // labelWeekFilter
+            // 
+            this.labelWeekFilter.AutoSize = true;
+            this.labelWeekFilter.Location = new System.Drawing.Point(10, 60);
+            this.labelWeekFilter.Name = "labelWeekFilter";
+            this.labelWeekFilter.Size = new System.Drawing.Size(70, 15);
+            this.labelWeekFilter.TabIndex = 4;
+            this.labelWeekFilter.Text = "Select Week";
+            // 
+            // pictureBox6
+            // 
+            this.pictureBox6.Location = new System.Drawing.Point(805, 0);
+            this.pictureBox6.Name = "pictureBox6";
+            this.pictureBox6.Size = new System.Drawing.Size(130, 123);
+            this.pictureBox6.TabIndex = 2;
+            this.pictureBox6.TabStop = false;
+            // 
+            // labelWeeklytt
+            // 
+            this.labelWeeklytt.AutoSize = true;
+            this.labelWeeklytt.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.labelWeeklytt.Location = new System.Drawing.Point(4, 15);
+            this.labelWeeklytt.Name = "labelWeeklytt";
+            this.labelWeeklytt.Size = new System.Drawing.Size(222, 32);
+            this.labelWeeklytt.TabIndex = 0;
+            this.labelWeeklytt.Text = "Activities Timetable";
+            // 
+            // flowLayoutPanelWTT
+            // 
+            this.flowLayoutPanelWTT.AutoSize = true;
+            this.flowLayoutPanelWTT.Location = new System.Drawing.Point(2, 99);
+            this.flowLayoutPanelWTT.Name = "flowLayoutPanelWTT";
+            this.flowLayoutPanelWTT.Size = new System.Drawing.Size(731, 216);
+            this.flowLayoutPanelWTT.TabIndex = 3;
+            // 
             // SomerenUI
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(738, 351);
+            this.Controls.Add(this.pnlActivitiesTimetable);
             this.Controls.Add(this.panelAS);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panelActivity);
@@ -904,6 +977,9 @@
             this.panelAS.ResumeLayout(false);
             this.panelAS.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            this.pnlActivitiesTimetable.ResumeLayout(false);
+            this.pnlActivitiesTimetable.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1002,5 +1078,12 @@
         private System.Windows.Forms.ColumnHeader columnHeader13;
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.Label labelAS;
+        private System.Windows.Forms.ToolStripMenuItem activitiesTimetableToolStripMenuItem;
+        private System.Windows.Forms.Panel pnlActivitiesTimetable;
+        private System.Windows.Forms.DateTimePicker dateTimePickerFilterWActivities;
+        private System.Windows.Forms.Label labelWeekFilter;
+        private System.Windows.Forms.PictureBox pictureBox6;
+        private System.Windows.Forms.Label labelWeeklytt;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelWTT;
     }
 }
