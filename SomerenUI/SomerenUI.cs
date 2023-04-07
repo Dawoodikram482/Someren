@@ -314,7 +314,7 @@ namespace SomerenUI
             pnlActivityParticipants.Hide();
 
 
-            // show all rooms
+            // show all drinks
             // paneldrinks.Show();
 
             try
