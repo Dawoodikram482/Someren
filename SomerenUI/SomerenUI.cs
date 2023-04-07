@@ -567,7 +567,7 @@ namespace SomerenUI
         private List<Activity> GetASActivities()
         {
             ActivityService activityService = new ActivityService();
-            List<Activity> activities = activityService.GetASActivities();
+            List<Activity> activities = activityService.GetActivities();
             return activities;
         }
 
