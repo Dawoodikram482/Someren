@@ -1,6 +1,10 @@
 ﻿using SomerenDAL;
 using SomerenModel;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace SomerenService
 {
@@ -18,11 +22,20 @@ namespace SomerenService
             List<Activity> activities = activityDb.GetAllActivities();
             return activities;
         }
-
-        public List<Activity> GetASActivities()
+        public void AddActivity(Activity activity)
         {
-            List<Activity> activities = activityDb.GetAllASActivities();
-            return activities;
+            //calling the adding method from dao
+            activityDb.AddActivity(activity);
+        }
+        public void RemoveActivity(Activity activity)
+        {
+            //calling the deletion method from dao
+            activityDb.DeleteActivity(activity);
+        }
+        public void UpdateActivity(Activity activity)
+        {
+            //calling the updating method from dao
+            activityDb.UpdateActivity(activity);
         }
     }
 
