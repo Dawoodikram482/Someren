@@ -70,6 +70,18 @@
             this.stoptime = new System.Windows.Forms.ColumnHeader();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.panelActivity = new System.Windows.Forms.Panel();
+            this.EndDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.startDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.activityNametextBox = new System.Windows.Forms.TextBox();
+            this.activityIdtextBox = new System.Windows.Forms.TextBox();
+            this.endtime = new System.Windows.Forms.Label();
+            this.starttime = new System.Windows.Forms.Label();
+            this.actname = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.Refreshbutton = new System.Windows.Forms.Button();
+            this.Deletebutton = new System.Windows.Forms.Button();
+            this.Updatebutton = new System.Windows.Forms.Button();
+            this.Addbutton = new System.Windows.Forms.Button();
             this.panellecturer = new System.Windows.Forms.Panel();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.listViewlecturer = new System.Windows.Forms.ListView();
@@ -247,7 +259,7 @@
             // 
             this.pnlDashboard.Controls.Add(this.lblDashboard);
             this.pnlDashboard.Location = new System.Drawing.Point(22, 51);
-            this.pnlDashboard.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlDashboard.Margin = new System.Windows.Forms.Padding(6);
             this.pnlDashboard.Name = "pnlDashboard";
             this.pnlDashboard.Size = new System.Drawing.Size(1742, 994);
             this.pnlDashboard.TabIndex = 1;
@@ -268,7 +280,7 @@
             this.panelrooms.Controls.Add(this.listViewRooms);
             this.panelrooms.Controls.Add(this.label1);
             this.panelrooms.Location = new System.Drawing.Point(22, 51);
-            this.panelrooms.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelrooms.Margin = new System.Windows.Forms.Padding(6);
             this.panelrooms.Name = "panelrooms";
             this.panelrooms.Size = new System.Drawing.Size(1742, 994);
             this.panelrooms.TabIndex = 6;
@@ -277,7 +289,7 @@
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(241, 262);
             this.pictureBox1.TabIndex = 2;
@@ -291,7 +303,7 @@
             this.capacity,
             this.buildingtype});
             this.listViewRooms.Location = new System.Drawing.Point(30, 90);
-            this.listViewRooms.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listViewRooms.Margin = new System.Windows.Forms.Padding(6);
             this.listViewRooms.Name = "listViewRooms";
             this.listViewRooms.Size = new System.Drawing.Size(1419, 650);
             this.listViewRooms.TabIndex = 1;
@@ -338,7 +350,7 @@
             this.pnlStudents.Controls.Add(this.listViewStudents);
             this.pnlStudents.Controls.Add(this.label2);
             this.pnlStudents.Location = new System.Drawing.Point(22, 51);
-            this.pnlStudents.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlStudents.Margin = new System.Windows.Forms.Padding(6);
             this.pnlStudents.Name = "pnlStudents";
             this.pnlStudents.Size = new System.Drawing.Size(1742, 994);
             this.pnlStudents.TabIndex = 7;
@@ -347,7 +359,7 @@
             // 
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox2.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox2.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(241, 262);
             this.pictureBox2.TabIndex = 2;
@@ -364,7 +376,7 @@
             this.Phonenumber,
             this.roomid});
             this.listViewStudents.Location = new System.Drawing.Point(30, 90);
-            this.listViewStudents.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listViewStudents.Margin = new System.Windows.Forms.Padding(6);
             this.listViewStudents.Name = "listViewStudents";
             this.listViewStudents.Size = new System.Drawing.Size(1419, 650);
             this.listViewStudents.TabIndex = 1;
@@ -440,12 +452,13 @@
             this.stoptime});
             this.listViewActivity.FullRowSelect = true;
             this.listViewActivity.Location = new System.Drawing.Point(30, 90);
-            this.listViewActivity.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listViewActivity.Margin = new System.Windows.Forms.Padding(6);
             this.listViewActivity.Name = "listViewActivity";
             this.listViewActivity.Size = new System.Drawing.Size(1419, 650);
             this.listViewActivity.TabIndex = 1;
             this.listViewActivity.UseCompatibleStateImageBehavior = false;
             this.listViewActivity.View = System.Windows.Forms.View.Details;
+            this.listViewActivity.SelectedIndexChanged += new System.EventHandler(this.listViewActivity_SelectedIndexChanged);
             // 
             // activityid
             // 
@@ -471,7 +484,7 @@
             // 
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox3.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox3.Name = "pictureBox3";
             this.pictureBox3.Size = new System.Drawing.Size(241, 262);
             this.pictureBox3.TabIndex = 2;
@@ -479,14 +492,137 @@
             // 
             // panelActivity
             // 
+            this.panelActivity.Controls.Add(this.EndDateTimePicker);
+            this.panelActivity.Controls.Add(this.startDateTimePicker);
+            this.panelActivity.Controls.Add(this.activityNametextBox);
+            this.panelActivity.Controls.Add(this.activityIdtextBox);
+            this.panelActivity.Controls.Add(this.endtime);
+            this.panelActivity.Controls.Add(this.starttime);
+            this.panelActivity.Controls.Add(this.actname);
+            this.panelActivity.Controls.Add(this.label6);
+            this.panelActivity.Controls.Add(this.Refreshbutton);
+            this.panelActivity.Controls.Add(this.Deletebutton);
+            this.panelActivity.Controls.Add(this.Updatebutton);
+            this.panelActivity.Controls.Add(this.Addbutton);
             this.panelActivity.Controls.Add(this.pictureBox3);
             this.panelActivity.Controls.Add(this.listViewActivity);
             this.panelActivity.Controls.Add(this.label3);
             this.panelActivity.Location = new System.Drawing.Point(22, 51);
-            this.panelActivity.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelActivity.Margin = new System.Windows.Forms.Padding(6);
             this.panelActivity.Name = "panelActivity";
-            this.panelActivity.Size = new System.Drawing.Size(1742, 994);
+            this.panelActivity.Size = new System.Drawing.Size(1742, 1100);
             this.panelActivity.TabIndex = 9;
+            // 
+            // EndDateTimePicker
+            // 
+            this.EndDateTimePicker.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            this.EndDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.EndDateTimePicker.Location = new System.Drawing.Point(268, 994);
+            this.EndDateTimePicker.Name = "EndDateTimePicker";
+            this.EndDateTimePicker.Size = new System.Drawing.Size(400, 39);
+            this.EndDateTimePicker.TabIndex = 14;
+            // 
+            // startDateTimePicker
+            // 
+            this.startDateTimePicker.CalendarTrailingForeColor = System.Drawing.SystemColors.HighlightText;
+            this.startDateTimePicker.CustomFormat = "yyyy-MM-dd hh:mm:ss";
+            this.startDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.startDateTimePicker.Location = new System.Drawing.Point(268, 922);
+            this.startDateTimePicker.Name = "startDateTimePicker";
+            this.startDateTimePicker.Size = new System.Drawing.Size(400, 39);
+            this.startDateTimePicker.TabIndex = 13;
+            this.startDateTimePicker.Value = new System.DateTime(2023, 4, 7, 15, 2, 0, 0);
+            // 
+            // activityNametextBox
+            // 
+            this.activityNametextBox.Location = new System.Drawing.Point(268, 848);
+            this.activityNametextBox.Name = "activityNametextBox";
+            this.activityNametextBox.Size = new System.Drawing.Size(200, 39);
+            this.activityNametextBox.TabIndex = 12;
+            // 
+            // activityIdtextBox
+            // 
+            this.activityIdtextBox.Location = new System.Drawing.Point(268, 772);
+            this.activityIdtextBox.Name = "activityIdtextBox";
+            this.activityIdtextBox.ReadOnly = true;
+            this.activityIdtextBox.Size = new System.Drawing.Size(200, 39);
+            this.activityIdtextBox.TabIndex = 11;
+            // 
+            // endtime
+            // 
+            this.endtime.AutoSize = true;
+            this.endtime.Location = new System.Drawing.Point(51, 1010);
+            this.endtime.Name = "endtime";
+            this.endtime.Size = new System.Drawing.Size(114, 32);
+            this.endtime.TabIndex = 10;
+            this.endtime.Text = "End Time";
+            // 
+            // starttime
+            // 
+            this.starttime.AutoSize = true;
+            this.starttime.Location = new System.Drawing.Point(51, 922);
+            this.starttime.Name = "starttime";
+            this.starttime.Size = new System.Drawing.Size(122, 32);
+            this.starttime.TabIndex = 9;
+            this.starttime.Text = "Start Time";
+            // 
+            // actname
+            // 
+            this.actname.AutoSize = true;
+            this.actname.Location = new System.Drawing.Point(51, 848);
+            this.actname.Name = "actname";
+            this.actname.Size = new System.Drawing.Size(163, 32);
+            this.actname.TabIndex = 8;
+            this.actname.Text = "Activity Name";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(51, 772);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(122, 32);
+            this.label6.TabIndex = 7;
+            this.label6.Text = "Activity ID";
+            // 
+            // Refreshbutton
+            // 
+            this.Refreshbutton.Location = new System.Drawing.Point(867, 957);
+            this.Refreshbutton.Name = "Refreshbutton";
+            this.Refreshbutton.Size = new System.Drawing.Size(208, 68);
+            this.Refreshbutton.TabIndex = 6;
+            this.Refreshbutton.Text = "Refresh";
+            this.Refreshbutton.UseVisualStyleBackColor = true;
+            this.Refreshbutton.Click += new System.EventHandler(this.Refreshbutton_Click);
+            // 
+            // Deletebutton
+            // 
+            this.Deletebutton.Location = new System.Drawing.Point(1252, 957);
+            this.Deletebutton.Name = "Deletebutton";
+            this.Deletebutton.Size = new System.Drawing.Size(197, 68);
+            this.Deletebutton.TabIndex = 5;
+            this.Deletebutton.Text = "Delete";
+            this.Deletebutton.UseVisualStyleBackColor = true;
+            this.Deletebutton.Click += new System.EventHandler(this.Deletebutton_Click);
+            // 
+            // Updatebutton
+            // 
+            this.Updatebutton.Location = new System.Drawing.Point(1252, 863);
+            this.Updatebutton.Name = "Updatebutton";
+            this.Updatebutton.Size = new System.Drawing.Size(197, 70);
+            this.Updatebutton.TabIndex = 4;
+            this.Updatebutton.Text = "Update";
+            this.Updatebutton.UseVisualStyleBackColor = true;
+            this.Updatebutton.Click += new System.EventHandler(this.Updatebutton_Click);
+            // 
+            // Addbutton
+            // 
+            this.Addbutton.Location = new System.Drawing.Point(1252, 768);
+            this.Addbutton.Name = "Addbutton";
+            this.Addbutton.Size = new System.Drawing.Size(197, 68);
+            this.Addbutton.TabIndex = 3;
+            this.Addbutton.Text = "Add";
+            this.Addbutton.UseVisualStyleBackColor = true;
+            this.Addbutton.Click += new System.EventHandler(this.Addbutton_Click);
             // 
             // panellecturer
             // 
@@ -494,7 +630,7 @@
             this.panellecturer.Controls.Add(this.listViewlecturer);
             this.panellecturer.Controls.Add(this.label4);
             this.panellecturer.Location = new System.Drawing.Point(22, 51);
-            this.panellecturer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panellecturer.Margin = new System.Windows.Forms.Padding(6);
             this.panellecturer.Name = "panellecturer";
             this.panellecturer.Size = new System.Drawing.Size(1742, 994);
             this.panellecturer.TabIndex = 8;
@@ -503,7 +639,7 @@
             // 
             this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
             this.pictureBox4.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox4.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox4.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox4.Name = "pictureBox4";
             this.pictureBox4.Size = new System.Drawing.Size(241, 262);
             this.pictureBox4.TabIndex = 2;
@@ -520,7 +656,7 @@
             this.idofroom,
             this.issupervison});
             this.listViewlecturer.Location = new System.Drawing.Point(30, 90);
-            this.listViewlecturer.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listViewlecturer.Margin = new System.Windows.Forms.Padding(6);
             this.listViewlecturer.Name = "listViewlecturer";
             this.listViewlecturer.Size = new System.Drawing.Size(1419, 650);
             this.listViewlecturer.TabIndex = 1;
@@ -584,7 +720,7 @@
             this.panelcashregister.Controls.Add(this.pictureBox5);
             this.panelcashregister.Controls.Add(this.label5);
             this.panelcashregister.Location = new System.Drawing.Point(22, 51);
-            this.panelcashregister.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelcashregister.Margin = new System.Windows.Forms.Padding(6);
             this.panelcashregister.Name = "panelcashregister";
             this.panelcashregister.Size = new System.Drawing.Size(1742, 994);
             this.panelcashregister.TabIndex = 9;
@@ -698,7 +834,7 @@
             // 
             this.pictureBox5.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox5.Image")));
             this.pictureBox5.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox5.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox5.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox5.Name = "pictureBox5";
             this.pictureBox5.Size = new System.Drawing.Size(241, 262);
             this.pictureBox5.TabIndex = 2;
@@ -727,7 +863,7 @@
             this.panelAS.Controls.Add(this.pictureBox9);
             this.panelAS.Controls.Add(this.labelAS);
             this.panelAS.Location = new System.Drawing.Point(2, 53);
-            this.panelAS.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.panelAS.Margin = new System.Windows.Forms.Padding(6);
             this.panelAS.Name = "panelAS";
             this.panelAS.Size = new System.Drawing.Size(1873, 762);
             this.panelAS.TabIndex = 21;
@@ -738,7 +874,7 @@
             this.buttonAddRemoveSuper.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.buttonAddRemoveSuper.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.buttonAddRemoveSuper.Location = new System.Drawing.Point(425, 21);
-            this.buttonAddRemoveSuper.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.buttonAddRemoveSuper.Margin = new System.Windows.Forms.Padding(6);
             this.buttonAddRemoveSuper.Name = "buttonAddRemoveSuper";
             this.buttonAddRemoveSuper.Padding = new System.Windows.Forms.Padding(9, 11, 9, 11);
             this.buttonAddRemoveSuper.Size = new System.Drawing.Size(169, 92);
@@ -788,7 +924,7 @@
             this.columnHeader18});
             this.listViewASLecturerNS.FullRowSelect = true;
             this.listViewASLecturerNS.Location = new System.Drawing.Point(706, 420);
-            this.listViewASLecturerNS.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listViewASLecturerNS.Margin = new System.Windows.Forms.Padding(6);
             this.listViewASLecturerNS.Name = "listViewASLecturerNS";
             this.listViewASLecturerNS.Size = new System.Drawing.Size(637, 245);
             this.listViewASLecturerNS.TabIndex = 6;
@@ -827,7 +963,7 @@
             this.columnHeader22});
             this.listViewASactivities.FullRowSelect = true;
             this.listViewASactivities.Location = new System.Drawing.Point(24, 145);
-            this.listViewASactivities.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listViewASactivities.Margin = new System.Windows.Forms.Padding(6);
             this.listViewASactivities.Name = "listViewASactivities";
             this.listViewASactivities.Size = new System.Drawing.Size(1319, 224);
             this.listViewASactivities.TabIndex = 5;
@@ -864,7 +1000,7 @@
             this.columnHeader13});
             this.listViewASLecturerS.FullRowSelect = true;
             this.listViewASLecturerS.Location = new System.Drawing.Point(24, 420);
-            this.listViewASLecturerS.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.listViewASLecturerS.Margin = new System.Windows.Forms.Padding(6);
             this.listViewASLecturerS.Name = "listViewASLecturerS";
             this.listViewASLecturerS.Size = new System.Drawing.Size(637, 245);
             this.listViewASLecturerS.TabIndex = 3;
@@ -898,7 +1034,7 @@
             // 
             this.pictureBox9.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox9.Image")));
             this.pictureBox9.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox9.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox9.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox9.Name = "pictureBox9";
             this.pictureBox9.Size = new System.Drawing.Size(241, 262);
             this.pictureBox9.TabIndex = 2;
@@ -923,7 +1059,7 @@
             this.pnlActivitiesTimetable.Controls.Add(this.labelWeeklytt);
             this.pnlActivitiesTimetable.Controls.Add(this.flowLayoutPanelWTT);
             this.pnlActivitiesTimetable.Location = new System.Drawing.Point(4, 51);
-            this.pnlActivitiesTimetable.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pnlActivitiesTimetable.Margin = new System.Windows.Forms.Padding(6);
             this.pnlActivitiesTimetable.Name = "pnlActivitiesTimetable";
             this.pnlActivitiesTimetable.Size = new System.Drawing.Size(1361, 695);
             this.pnlActivitiesTimetable.TabIndex = 35;
@@ -931,7 +1067,7 @@
             // dateTimePickerFilterWActivities
             // 
             this.dateTimePickerFilterWActivities.Location = new System.Drawing.Point(186, 124);
-            this.dateTimePickerFilterWActivities.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.dateTimePickerFilterWActivities.Margin = new System.Windows.Forms.Padding(6);
             this.dateTimePickerFilterWActivities.Name = "dateTimePickerFilterWActivities";
             this.dateTimePickerFilterWActivities.Size = new System.Drawing.Size(368, 39);
             this.dateTimePickerFilterWActivities.TabIndex = 5;
@@ -950,7 +1086,7 @@
             // pictureBox6
             // 
             this.pictureBox6.Location = new System.Drawing.Point(1495, 0);
-            this.pictureBox6.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.pictureBox6.Margin = new System.Windows.Forms.Padding(6);
             this.pictureBox6.Name = "pictureBox6";
             this.pictureBox6.Size = new System.Drawing.Size(241, 262);
             this.pictureBox6.TabIndex = 2;
@@ -971,7 +1107,7 @@
             // 
             this.flowLayoutPanelWTT.AutoSize = true;
             this.flowLayoutPanelWTT.Location = new System.Drawing.Point(4, 211);
-            this.flowLayoutPanelWTT.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.flowLayoutPanelWTT.Margin = new System.Windows.Forms.Padding(6);
             this.flowLayoutPanelWTT.Name = "flowLayoutPanelWTT";
             this.flowLayoutPanelWTT.Size = new System.Drawing.Size(1358, 461);
             this.flowLayoutPanelWTT.TabIndex = 3;
@@ -991,7 +1127,7 @@
             this.Controls.Add(this.pnlActivitiesTimetable);
             this.Controls.Add(this.panelAS);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "SomerenUI";
             this.Text = "SomerenApp";
             this.menuStrip1.ResumeLayout(false);
@@ -1124,5 +1260,17 @@
         private System.Windows.Forms.PictureBox pictureBox6;
         private System.Windows.Forms.Label labelWeeklytt;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelWTT;
+        private System.Windows.Forms.DateTimePicker EndDateTimePicker;
+        private System.Windows.Forms.DateTimePicker startDateTimePicker;
+        private System.Windows.Forms.TextBox activityNametextBox;
+        private System.Windows.Forms.TextBox activityIdtextBox;
+        private System.Windows.Forms.Label endtime;
+        private System.Windows.Forms.Label starttime;
+        private System.Windows.Forms.Label actname;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button Refreshbutton;
+        private System.Windows.Forms.Button Deletebutton;
+        private System.Windows.Forms.Button Updatebutton;
+        private System.Windows.Forms.Button Addbutton;
     }
 }

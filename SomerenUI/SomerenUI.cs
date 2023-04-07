@@ -17,6 +17,7 @@ namespace SomerenUI
             InitializeComponent();
 
             ShowDashboardPanel(); //opens dashboard panel when you log in
+            Deletebutton.Enabled = false; //disables the delete button (list activities part)
         }
 
         private void ShowDashboardPanel()
@@ -467,6 +468,156 @@ namespace SomerenUI
             }
         }
         //cash register part end
+
+
+        //List of activiities part start
+        private void Refreshbutton_Click(object sender, EventArgs e)
+        {
+            //refresh the list of activities
+            ShowActivityPanel();
+
+            //clear the input from id and name text box
+            activityIdtextBox.Clear();
+            activityNametextBox.Clear();
+
+            //reset the datetime pickers to current date time
+            startDateTimePicker.ResetText();
+            EndDateTimePicker.ResetText();
+        }
+        private void Deletebutton_Click(object sender, EventArgs e)
+        {
+            //parsing the selected row to int
+            int activityId = int.Parse(listViewActivity.SelectedItems[0].SubItems[0].Text);
+
+            //creating new object of class 
+            Activity activity = new Activity();
+            //assigning the object to the property activity id
+            activity.activityID = activityId;
+
+            //deleting the activity using try catch
+            try
+            {
+                //creatinga an object of activity service
+                ActivityService activityService = new ActivityService();
+                //asking for permission to delete
+                DialogResult dialogResult = MessageBox.Show("Are you sure you want to delete this Activity?", "Confirmation", MessageBoxButtons.YesNo);
+
+                //deleting the activity if user agrees
+                if (dialogResult == DialogResult.Yes)
+                {
+                    //calling the delete method
+                    activityService.RemoveActivity(activity);
+                    //showing the success message 
+                    MessageBox.Show("The Activity has been deleted successfully", "Success");
+                }
+
+                // cancelling the deletion after user's denial
+                else if (dialogResult == DialogResult.No)
+                {
+                    MessageBox.Show("Activity was not deleted", "Failed");
+                }
+            }
+            //using catch to throw new exception if the program has an error
+            catch (Exception ex)
+            {
+                //showing the error message in message box
+                MessageBox.Show("Something went wrong while deleting the Activity \n" + ex.Message, "Error!");
+            }
+            //showing the new list
+            ShowActivityPanel();
+        }
+        private void Updatebutton_Click(object sender, EventArgs e)
+        {
+            //updating the activity using try catch 
+            try
+            {
+                //checking if the number of selected item is greater than 0
+                if (listViewActivity.SelectedItems.Count > 0)
+                {
+
+                    Activity activity = (Activity)listViewActivity.SelectedItems[0].Tag;
+
+                    //assigning the data entered to the textbox and datetimepicker to properties in class activity
+                    activity.activityName = activityNametextBox.Text;
+                    activity.startTime = DateTime.Parse(startDateTimePicker.Text);
+                    activity.endTime = DateTime.Parse(EndDateTimePicker.Text);
+                    //creating an object of service class
+                    ActivityService activityService = new ActivityService();
+                    //calling the update method
+                    activityService.UpdateActivity(activity);
+                    //showing the success message 
+                    MessageBox.Show("Activity updating successfull", "Success");
+                }
+                else
+                {
+                    //showing the failure message in message box
+                    MessageBox.Show("Could not update activity because of an error", "Failure!");
+                    return;
+                }
+            }
+            //using catch to throw new exception if the program has an error
+            catch (Exception ex)
+            {
+                //showing the error message in message box
+                MessageBox.Show("Something went wrong while updating the activity! \n" + ex.Message, "Error!");
+            }
+            //showing the new list
+            ShowActivityPanel();
+        }
+
+        private void Addbutton_Click(object sender, EventArgs e)
+        {
+            //adding the activity using try catch 
+            try
+            {
+                //creating an object of activity class
+                Activity activity = new Activity();
+
+                //assigning the instances of objects to the input added in the textbox and date time picker
+                activity.activityName = activityNametextBox.Text;
+                activity.startTime = DateTime.Parse(startDateTimePicker.Text);
+                activity.endTime = DateTime.Parse(EndDateTimePicker.Text);
+
+                //creating an object of activityservice class
+                ActivityService activityService = new ActivityService();
+                //adding the activity by calling the method 
+                activityService.AddActivity(activity);
+                //showing the success message 
+                MessageBox.Show($"Activity: {activityNametextBox.Text} added successfuly", "Success");
+            }
+            //using catch to throw new exception if the program has an error
+            catch (Exception ex)
+            {
+                //showing the error message in message box
+                MessageBox.Show("Something went wrong while adding the activity! \n" + ex.Message, "Error");
+            }
+            //showing the new list
+            ShowActivityPanel();
+        }
+
+        private void listViewActivity_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            //enable button if the more than zero rows are selected
+            Deletebutton.Enabled = listViewActivity.SelectedItems.Count >= 0;
+            //check if any row has been selected
+            if (listViewActivity.SelectedItems.Count > 0)
+            {
+
+                Activity activity = (Activity)listViewActivity.SelectedItems[0].Tag;
+                //assigning values added as input to properties through instance of object
+                activityIdtextBox.Text = activity.activityID.ToString();
+                activityNametextBox.Text = activity.activityName.ToString();
+                startDateTimePicker.Text = activity.startTime.ToString();
+                EndDateTimePicker.Text = activity.endTime.ToString();
+            }
+            else
+            {
+                return;
+            }
+        }
+
+        // activity supervisor part start
         private void activitySupervisorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // hide all other panels
@@ -761,5 +912,9 @@ namespace SomerenUI
         {
             Enablecheckoutbutton();
         }
+
+       
+
+       
     }
 }
