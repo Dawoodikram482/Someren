@@ -403,6 +403,8 @@ namespace SomerenUI
             pnlStudents.Hide();
             panelrooms.Hide();
             pnlActivityParticipants.Hide();
+            pnlActivitiesTimetable.Hide();
+            panelAS.Hide();
 
 
 
