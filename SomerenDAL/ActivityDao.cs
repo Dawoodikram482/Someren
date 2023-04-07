@@ -38,7 +38,7 @@ namespace SomerenDAL
                 Activity _act = new Activity()
                 {
                     //assigning the query elements to the properties of activity class
-                    activityID = dr["activity_id"].ToString(),
+                    activityID = (int)dr["activity_id"],
                     activityName = dr["activity_name"].ToString(),
                     startTime = (DateTime)dr["start_time"],
                     endTime = (DateTime)dr["end_time"]
