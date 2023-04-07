@@ -351,7 +351,7 @@ namespace SomerenUI
             }
         }
 
-
+        //cash register part start
         private void DisplayCashRegisterPanel(List<Student> students, List<Drinks> drinks)
         {
             listViewstudentnames.Items.Clear();
@@ -412,51 +412,6 @@ namespace SomerenUI
         }
 
 
-
-        private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
-        {
-            ShowDashboardPanel();
-        }
-
-        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowStudentsPanel(); //show student panel
-        }
-
-
-        private void roomsToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            ShowRoomsPanel();  //shows room panel when room button is clicked from menu
-
-        }
-
-        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowActivityPanel();  //shows activity panel on pressing room
-        }
-
-        private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowTeachersPanel();
-        }
-
-        private void DrinkToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowDrinkPanel();
-        }
-
-        private void cashRegisterToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowCashRegisterPanel();
-        }
-
-        
-
         private void Enablecheckoutbutton()
         {
 
@@ -484,15 +439,6 @@ namespace SomerenUI
                 }
         }
 
-        private void listViewdrinks_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Enablecheckoutbutton();
-        }
-
-        private void listViewstudentnames_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Enablecheckoutbutton();
-        }
 
         private void checkoutbutton_Click_1(object sender, EventArgs e)
         {
@@ -520,7 +466,7 @@ namespace SomerenUI
                 MessageBox.Show("Something went wrong while checkout: " + ex.Message);
             }
         }
-
+        //cash register part end
         private void activitySupervisorToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // hide all other panels
@@ -764,6 +710,56 @@ namespace SomerenUI
         {
             DateTime date = dateTimePickerFilterWActivities.Value.Date;
             GenerateWeeklyPanels(date);
+        }
+        private void listViewdrinks_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Enablecheckoutbutton();
+        }
+        private void dashboardToolStripMenuItem1_Click(object sender, System.EventArgs e)
+        {
+            ShowDashboardPanel();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void studentsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowStudentsPanel(); //show student panel
+        }
+
+
+        private void roomsToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            ShowRoomsPanel();  //shows room panel when room button is clicked from menu
+
+        }
+
+        private void activitiesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowActivityPanel();  //shows activity panel on pressing room
+        }
+
+        private void lecturersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowTeachersPanel();
+        }
+
+        private void DrinkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowDrinkPanel();
+        }
+
+        private void cashRegisterToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowCashRegisterPanel();
+        }
+
+        private void listViewstudentnames_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Enablecheckoutbutton();
         }
     }
 }
