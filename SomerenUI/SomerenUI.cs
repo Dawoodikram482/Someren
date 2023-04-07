@@ -591,7 +591,7 @@ namespace SomerenUI
                 return;
             }
         }
-        //end part a lis activities
+        //end part a list activities
 
 
         private void Refreshbutton_Click(object sender, EventArgs e)
