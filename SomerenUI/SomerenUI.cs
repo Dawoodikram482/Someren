@@ -6,11 +6,15 @@ using System;
 using System.Diagnostics;
 using Activity = SomerenModel.Activity;
 using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace SomerenUI
 {
     public partial class SomerenUI : Form
     {
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["SomerenDatabase"].ConnectionString);
         public SomerenUI()
         {
             InitializeComponent();
@@ -29,6 +33,7 @@ namespace SomerenUI
             panellecturer.Hide();
             panelcashregister.Hide();
             // paneldrinks.Hide();
+            pnlActivityParticipants.Hide();
 
             // show dashboard
             pnlDashboard.Show();
@@ -43,6 +48,7 @@ namespace SomerenUI
             panelActivity.Hide();
             panellecturer.Hide();
             panelcashregister.Hide();
+            pnlActivityParticipants.Hide();
 
             // show students
             pnlStudents.Show();
@@ -106,6 +112,7 @@ namespace SomerenUI
             panellecturer.Hide();
             pnlStudents.Hide();
             panelcashregister.Hide();
+            pnlActivityParticipants.Hide();
 
             // show all rooms
             panelrooms.Show();
@@ -175,6 +182,7 @@ namespace SomerenUI
             panelrooms.Hide();
             panellecturer.Hide();
             panelcashregister.Hide();
+            pnlActivityParticipants.Hide();
 
             //show all activity
             panelActivity.Show();
@@ -261,6 +269,7 @@ namespace SomerenUI
             panelrooms.Hide();
             panelActivity.Hide();
             panelcashregister.Hide();
+            pnlActivityParticipants.Hide();
 
             //show all activity
             panellecturer.Show();
@@ -293,10 +302,11 @@ namespace SomerenUI
             panellecturer.Hide();
             pnlStudents.Hide();
             panelrooms.Hide();
+            pnlActivityParticipants.Hide();
 
 
             // show all rooms
-            // paneldrinks.Show();
+            //paneldrinks.Show();
 
             try
             {
@@ -383,6 +393,7 @@ namespace SomerenUI
             panellecturer.Hide();
             pnlStudents.Hide();
             panelrooms.Hide();
+            pnlActivityParticipants.Hide();
 
 
 
@@ -419,7 +430,7 @@ namespace SomerenUI
                 checkoutbutton.Enabled = false;
             }
         }
-        private void UnselectListviewItems(ListView listView)
+        private void UnselectListviewItems(System.Windows.Forms.ListView listView)
         {
             if (listView.SelectedIndices.Count > 0)
                 for (int i = 0; i < listView.SelectedIndices.Count; i++)
@@ -462,8 +473,8 @@ namespace SomerenUI
         private void Deletebutton_Click(object sender, EventArgs e)
         {
             //parsing the selected row to int
-            int activityId = int.Parse(listViewActivity.SelectedItems[0].SubItems[0].Text);
-            
+            string activityId = (listViewActivity.SelectedItems[0].SubItems[0].Text);
+
             //creating new object of class 
             Activity activity = new Activity();
             //assigning the object to the property activity id
@@ -520,7 +531,7 @@ namespace SomerenUI
                     //creating an object of service class
                     ActivityService activityService = new ActivityService();
                     //calling the update method
-                    activityService.UpdateActivity(activity);                    
+                    activityService.UpdateActivity(activity);
                     //showing the success message 
                     MessageBox.Show("Activity updating successfull", "Success");
                 }
@@ -553,7 +564,7 @@ namespace SomerenUI
                 activity.activityName = activityNametextBox.Text;
                 activity.startTime = DateTime.Parse(startDateTimePicker.Text);
                 activity.endTime = DateTime.Parse(EndDateTimePicker.Text);
-                
+
                 //creating an object of activityservice class
                 ActivityService activityService = new ActivityService();
                 //adding the activity by calling the method 
@@ -578,7 +589,7 @@ namespace SomerenUI
             //check if any row has been selected
             if (listViewActivity.SelectedItems.Count > 0)
             {
-                
+
                 Activity activity = (Activity)listViewActivity.SelectedItems[0].Tag;
                 //assigning values added as input to properties through instance of object
                 activityIdtextBox.Text = activity.activityID.ToString();
@@ -598,7 +609,7 @@ namespace SomerenUI
         {
             //refresh the list of activities
             ShowActivityPanel();
-            
+
             //clear the input from id and name text box
             activityIdtextBox.Clear();
             activityNametextBox.Clear();
@@ -657,6 +668,50 @@ namespace SomerenUI
         private void listViewstudentnames_SelectedIndexChanged(object sender, EventArgs e)
         {
             Enablecheckoutbutton();
+        }
+
+        private void activityParticipantsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            showGridData();
+        }
+
+        //participants part
+        private void btnadd_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd2 = new SqlCommand("Insert into Participant (ParticipantsName) Values (@ParticipantsName)", conn);
+            cmd2.Parameters.AddWithValue("ParticipantsName", txtbxinput.Text);
+            conn.Open();
+            cmd2.ExecuteNonQuery();
+            conn.Close();
+            showGridData();
+        }
+
+        public void showGridData()
+        {
+            SqlDataAdapter da = new SqlDataAdapter("SELECT  [ParticipantID],[NonParticipantName],[ParticipantsName],[activity_name] FROM [dbo].[Participant] left join [Activity] on [Participant].[ActivityID] = [Activity].activity_id", "server = grasshoppersdatabase4.database.windows.net; database = GrassHoppersDataBase; UID = GrasshopperGroup; password = IFKRGroup5project3");
+            DataSet ds = new DataSet();
+            da.Fill(ds, "Participant");
+            dataGridView1.DataSource = ds.Tables["Participant"].DefaultView;
+
+            // hide all other panels
+            pnlDashboard.Hide();
+            pnlStudents.Hide();
+            panelrooms.Hide();
+            panelActivity.Hide();
+            panelcashregister.Hide();
+            panellecturer.Hide();
+
+            pnlActivityParticipants.Show();
+        }
+
+        private void btnrmv_Click(object sender, EventArgs e)
+        {
+            SqlCommand cmd2 = new SqlCommand("delete from Participant where ParticipantsName=@ParticipantsName", conn);
+            cmd2.Parameters.AddWithValue("ParticipantsName", txtbxinput.Text);
+            conn.Open();
+            cmd2.ExecuteNonQuery();
+            conn.Close();
+            showGridData();
         }
     }
 }
